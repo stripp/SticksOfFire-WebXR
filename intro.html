@@ -1,31 +1,74 @@
 <html>
   <head>
+  <!-- A‑Frame Core -->
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+  <!-- Extras: nav-mesh + teleport -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+<title>Introductory Scene</title>
   </head>
   <body>
     <a-scene reflection="directionalLight:a-light#dirlight;" shadow="type: pcfsoft;" shadow="autoUpdate: false" inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"  xr-mode-ui="enabled: true" webxr="optionalFeatures: hand-tracking, layers" renderer="antialias: true">
 	<a-assets>
-   	 <img id="plantPark" src="textures/park_background_flipped.png">
-	<img id="grassBase" src="textures/uncutGrass_B.png">
-	<img id="grassNormal" src="textures/uncutGrass_N.png">
-	<a-asset-item id="parkBench" src="meshes/parkBench/Park_bench.gltf"></a-asset-item>
-	<a-asset-item id="lightpole" src="meshes/lightpole/SM_LightPole.gltf"></a-asset-item>
-	<a-asset-item id="wasteBasket" src="meshes/wasteBasket/park_basket.gltf"></a-asset-item>
-	<a-asset-item id="dumbcaneA" src="meshes/Dumbcane/dumbcaneA.glb"></a-asset-item>
-	<a-asset-item id="dumbcaneB" src="meshes/Dumbcane/dumbcaneB.glb"></a-asset-item>
-	<a-asset-item id="dumbcaneC" src="meshes/Dumbcane/dumbcaneC.glb"></a-asset-item>
-	<a-asset-item id="dumbcaneD" src="meshes/Dumbcane/dumbcaneD.glb"></a-asset-item>
-	<a-asset-item id="dumbcaneE" src="meshes/Dumbcane/dumbcaneE.glb"></a-asset-item>
-	<a-asset-item id="taro" src="meshes/taroPlant/taro1.glb"></a-asset-item>
-	<a-asset-item id="palm1" src="meshes/palms/palmCollection/bottlePalm1.glb"></a-asset-item>
-	<a-asset-item id="palmetto" src="meshes/palms/palmCollection/palmetto.glb"></a-asset-item>
-	<a-asset-item id="SOFsculpture" src="meshes/SOF_sculpture_resized.glb"></a-asset-item>
-	<a-asset-item id="sidewalk2" src="meshes/sidewalk5.glb"></a-asset-item>
-	<a-asset-item id="pedestal" src="meshes/pedestal.glb"></a-asset-item>
-	<a-asset-item id="lowWall" src="meshes/parkWall2.glb"></a-asset-item>
+   	 <img id="plantPark" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/textures/park_background_flipped.png">
+	<img id="grassBase" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/textures/uncutGrass_B.png">
+	<img id="grassNormal" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/textures/uncutGrass_N.png">
+	<a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Park_bench.gltf"></a-asset-item>
+	<a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/SM_LightPole.gltf"></a-asset-item>
+	<a-asset-item id="wasteBasket" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/park_basket.gltf"></a-asset-item>
+	<a-asset-item id="dumbcaneA" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Dumbcane/dumbcaneA.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneB" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Dumbcane/dumbcaneB.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneC" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Dumbcane/dumbcaneC.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneD" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Dumbcane/dumbcaneD.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneE" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Dumbcane/dumbcaneE.glb"></a-asset-item>
+	<a-asset-item id="taro" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/taro1.glb"></a-asset-item>
+	<a-asset-item id="palm1" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bottlePalm1.glb"></a-asset-item>
+	<a-asset-item id="palmetto" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/palmetto.glb"></a-asset-item>
+	<a-asset-item id="SOFsculpture" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/SOF_sculpture_resized.glb"></a-asset-item>
+	<a-asset-item id="sidewalk2" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/sidewalk5.glb"></a-asset-item>
+	<a-asset-item id="pedestal" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pedestal.glb"></a-asset-item>
+	<a-asset-item id="lowWall" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/parkWall2.glb"></a-asset-item>
   	</a-assets>
+
+  <!-- CAMERA RIG with SMOOTH LOCOMOTION -->
+  <a-entity id="rig"
+            movement-controls="speed: 0.15; fly: false"
+            position="5 1.6 5">
+
+    <!-- CAMERA with WASD + mouse look -->
+    <a-entity id="camera"
+              camera
+              look-controls="pointerLockEnabled: true"
+              wasd-controls="acceleration: 20">
+    </a-entity>
+
+  </a-entity>
+
+    <!-- RIGHT HAND (teleport + laser) -->
+    <a-entity id="rightHand"
+              laser-controls="hand: right"
+              teleport-controls="
+                cameraRig: #rig;
+                teleportOrigin: #camera;
+                button: trigger;
+                type: parabolic;
+                curveShootingSpeed: 6;
+              ">
+    </a-entity>
+
+    <!-- LEFT HAND (laser only) -->
+    <a-entity id="leftHand"
+              laser-controls="hand: left">
+    </a-entity>
+
+    <!-- OPTIONAL HAND TRACKING -->
+    <a-entity hand-tracking-controls="hand: left"></a-entity>
+    <a-entity hand-tracking-controls="hand: right"></a-entity>
+
+ <!-- ENVIRONMENT -->
+
       <a-sphere position="0 1 0" rotation="0 45 0" radius="15" src="#plantPark" material="side: back; shader: flat" metadata="unlit" shadow="receive: false"></a-sphere>
       <a-plane position="0 -1 0" rotation="-90 0 0" width="40" height="40" color="#bbff00" src="#grassBase" repeat="20 20" normal-map="#grassNormal" normal-texture-repeat="20 20" roughness="0.8" shadow="receive: true"></a-plane>
+	<a-plane nav-mesh position="0 1.05 0" rotation="-90 0 0" width="25" height="25" visible="false"></a-plane>
 	<a-entity light="type: ambient; intensity: 4; position: 0 0 5"></a-entity>
 	<a-entity light="type: directional; intensity: 3; castShadow: true; shadowCameraVisible: true" position="4 5 11"></a-entity>
 	<a-entity gltf-model="#sidewalk2" id="walk1" scale=".85 1 .85" position="4.2 -1 11.35" rotation="0 26.8 0" shadow="receive: true"></a-entity>
@@ -60,34 +103,6 @@
 	<a-entity gltf-model="#lightpole" id="pole2" rotation="0 -120 0" scale="1.5 1.5 1.5" position="4.723 -1 -12.6" shadow="cast: true"></a-entity>
 	<a-entity gltf-model="#SOFsculpture" id="SOF" rotation="0 95 0" position="0 -1 0" scale="1.4 1.4 1.4" shadow="cast: true"></a-entity>
   
-    <!-- CAMERA + HEADSET -->
-      <a-entity id="rig" position="5 1.6 5">
-        <a-entity 
-          id="camera" 
-          camera 
-          look-controls 
-          wasd-controls="acceleration: 20"
-        ></a-entity>
-      </a-entity>
-
-      <!-- QUEST CONTROLLERS -->
-      <!-- Right hand -->
-      <a-entity 
-        id="rightHand"
-        laser-controls="hand: right"
-        raycaster="objects: .clickable"
-      ></a-entity>
-
-      <!-- Left hand -->
-      <a-entity 
-        id="leftHand"
-        laser-controls="hand: left"
-        raycaster="objects: .clickable"
-      ></a-entity>
-
-      <!-- OPTIONAL: HAND TRACKING (Quest supports this) -->
-      <a-entity hand-tracking-controls="hand: left"></a-entity>
-      <a-entity hand-tracking-controls="hand: right"></a-entity>
     </a-scene>
   </body>
 </html>

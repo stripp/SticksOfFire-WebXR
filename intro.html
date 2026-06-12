@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene reflection="directionalLight:a-light#dirlight;" shadow="type: pcfsoft;" shadow="autoUpdate: false" inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"  xr-mode-ui="enabled: true" webxr="optionalFeatures: hand-tracking, layers" renderer="antialias: true">
+	<a-assets>
+   	 <img id="plantPark" src="textures/park_background_flipped.png">
+	<img id="grassBase" src="textures/uncutGrass_B.png">
+	<img id="grassNormal" src="textures/uncutGrass_N.png">
+	<a-asset-item id="parkBench" src="meshes/parkBench/Park_bench.gltf"></a-asset-item>
+	<a-asset-item id="lightpole" src="meshes/lightpole/SM_LightPole.gltf"></a-asset-item>
+	<a-asset-item id="wasteBasket" src="meshes/wasteBasket/park_basket.gltf"></a-asset-item>
+	<a-asset-item id="dumbcaneA" src="meshes/Dumbcane/dumbcaneA.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneB" src="meshes/Dumbcane/dumbcaneB.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneC" src="meshes/Dumbcane/dumbcaneC.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneD" src="meshes/Dumbcane/dumbcaneD.glb"></a-asset-item>
+	<a-asset-item id="dumbcaneE" src="meshes/Dumbcane/dumbcaneE.glb"></a-asset-item>
+	<a-asset-item id="taro" src="meshes/taroPlant/taro1.glb"></a-asset-item>
+	<a-asset-item id="palm1" src="meshes/palms/palmCollection/bottlePalm1.glb"></a-asset-item>
+	<a-asset-item id="palmetto" src="meshes/palms/palmCollection/palmetto.glb"></a-asset-item>
+	<a-asset-item id="SOFsculpture" src="meshes/SOF_sculpture_resized.glb"></a-asset-item>
+	<a-asset-item id="sidewalk2" src="meshes/sidewalk5.glb"></a-asset-item>
+	<a-asset-item id="pedestal" src="meshes/pedestal.glb"></a-asset-item>
+	<a-asset-item id="lowWall" src="meshes/parkWall2.glb"></a-asset-item>
+  	</a-assets>
+      <a-sphere position="0 1 0" rotation="0 45 0" radius="15" src="#plantPark" material="side: back; shader: flat" metadata="unlit" shadow="receive: false"></a-sphere>
+      <a-plane position="0 -1 0" rotation="-90 0 0" width="40" height="40" color="#bbff00" src="#grassBase" repeat="20 20" normal-map="#grassNormal" normal-texture-repeat="20 20" roughness="0.8" shadow="receive: true"></a-plane>
+	<a-entity light="type: ambient; intensity: 4; position: 0 0 5"></a-entity>
+	<a-entity light="type: directional; intensity: 3; castShadow: true; shadowCameraVisible: true" position="4 5 11"></a-entity>
+	<a-entity gltf-model="#sidewalk2" id="walk1" scale=".85 1 .85" position="4.2 -1 11.35" rotation="0 26.8 0" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#sidewalk2" id="walk2" scale=".85 1 .85" position="1.727 -1 -12" rotation="0 162 0" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#sidewalk2" id="walk3" scale=".85 1 .85" position="-10 -1 -0.5" rotation="0 270 0" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#sidewalk2" id="walk4" scale=".85 1 .85" position="10.5 -1 -1" rotation="0 90 0" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#pedestal" id="pedestal1" scale=".7 .7 .7" position="14.3 -1 -4.2" rotation="0 12 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#pedestal" id="pedestal2" scale=".7 .7 .7" position="14.85 -1 .53" rotation="0 15 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#pedestal" id="pedestal3" scale=".7 .7 .7" position="8.37 -1 12.84" rotation="0 38.69 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#pedestal" id="pedestal4" scale=".7 .7 .7" position="3.14 -1 14.9" rotation="0 38.69 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#pedestal" id="pedestal5" scale=".7 .7 .7" position="-14.7 -1 -2.47" rotation="0 15.2 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#pedestal" id="pedestal6" scale=".7 .7 .7" position="-14.5 -1 3.4" rotation="0 15.2 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#lowWall" id="wall1" scale="1 1 1" position="11.7 -1 5.9" rotation="0 151 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#lowWall" id="wall2" scale="1.2 1.2 1.2" position="-6.4 -1 9.4" rotation="0 58 0" shadow="receive: true; cast: true"></a-entity>
+	<a-entity gltf-model="#lowWall" id="wall3" scale="1 1 1" position="9.9 -1 -8.6" rotation="0 45 0" shadow="receive: true; cast: true"></a-entity>
+	<a-cylinder position="0 0.005 0"  radius="4" height=".005" color="#00ccff" transparent="true" opacity="0.4"></a-cylinder>
+  	<a-entity gltf-model="#taro" id="taro1" scale="2 2 2" position="-12.3 -1 -3.85" rotation="0 0 0" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#taro" id="taro2" scale="2 2 2" position="-12.3 -1 3.1" rotation="0 60 0" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#palm1" id="palm1" scale="2 2 2" position="-11.5 -3 10"></a-entity>
+	<a-entity gltf-model="#palm1" id="palm2" scale="2 2 2" position="-13.5 -2.81 7.5"></a-entity>
+	<a-entity gltf-model="#palmetto" id="palmetto1" scale="1.5 1.5 1.5" position="-5.5 -1 -13.25" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#palmetto" id="palmetto2" rotation="0 -35.5 0" scale="1.5 1.5 1.5" position=".8 -1.4 14.8" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#dumbcaneA" id="dumbcane1" scale="3 3 3" position="7.7 -2.2 11.2" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#dumbcaneB" id="dumbcane2" scale="2 2 2" position="7 2.6 13.4" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#dumbcaneC" id="dumbcane3" scale="2 2 2" position="7.55 -1.6 12.1" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#dumbcaneD" id="dumbcane4" scale="2 2 2" position="7.3 -2.2 10.8" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#dumbcaneE" id="dumbcane5" scale="2 2 2" position="7.2 -1.6 11.4" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#parkBench" id="bench" rotation="0 29 0" scale="1.5 1.5 1.5" position="0.4 -1 11" shadow="cast: true" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#wasteBasket" id="basket1" rotation="0 70 0" scale="1.5 1.5 1.5" position="-1 -1 -13.6" shadow="cast: true" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#wasteBasket" id="basket2" rotation="0 0 0" scale="1.5 1.5 1.5" position="6.8 -1 11.4" shadow="cast: true" shadow="receive: true"></a-entity>
+	<a-entity gltf-model="#lightpole" id="pole1" rotation="0 120 0" scale="1.5 1.5 1.5" position="2 -1 13.5" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#lightpole" id="pole2" rotation="0 -120 0" scale="1.5 1.5 1.5" position="4.723 -1 -12.6" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#SOFsculpture" id="SOF" rotation="0 95 0" position="0 -1 0" scale="1.4 1.4 1.4" shadow="cast: true"></a-entity>
+  
+    <!-- CAMERA + HEADSET -->
+      <a-entity id="rig" position="5 1.6 5">
+        <a-entity 
+          id="camera" 
+          camera 
+          look-controls 
+          wasd-controls="acceleration: 20"
+        ></a-entity>
+      </a-entity>
+
+      <!-- QUEST CONTROLLERS -->
+      <!-- Right hand -->
+      <a-entity 
+        id="rightHand"
+        laser-controls="hand: right"
+        raycaster="objects: .clickable"
+      ></a-entity>
+
+      <!-- Left hand -->
+      <a-entity 
+        id="leftHand"
+        laser-controls="hand: left"
+        raycaster="objects: .clickable"
+      ></a-entity>
+
+      <!-- OPTIONAL: HAND TRACKING (Quest supports this) -->
+      <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity>
+    </a-scene>
+  </body>
+</html>

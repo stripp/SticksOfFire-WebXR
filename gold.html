@@ -116,7 +116,7 @@
       <!-- Nav Mesh -->
       <a-plane id="nav"
                nav-mesh
-               position="0 -0.8 0"
+               position="0 -0.9 0"
                rotation="-90 0 0"
                width="25"
                height="25"
@@ -184,7 +184,7 @@ Your browser does not support the audio element.
       <a-entity gltf-model="#palmetto" id="palmetto2" scale="1.5 1.5 1.5" position=".8 -1.4 14.8" rotation="0 -35.5 0" shadow="cast: true"></a-entity>
 
       <a-entity gltf-model="#dumbcaneA" id="dumbcane1" scale="3 3 3" position="7.7 -2.2 11.2" shadow="cast: true"></a-entity>
-      <a-entity gltf-model="#dumbcaneB" id="dumbcane2" scale="2 2 2" position="7 -1.6 13.4" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#dumbcaneB" id="dumbcane2" scale="2 2 2" position="7 -1.6 11.3" shadow="cast: true"></a-entity>
       <a-entity gltf-model="#dumbcaneC" id="dumbcane3" scale="2 2 2" position="7.55 -1.6 12.1" shadow="cast: true"></a-entity>
       <a-entity gltf-model="#dumbcaneD" id="dumbcane4" scale="2 2 2" position="7.3 -2.2 10.8" shadow="cast: true"></a-entity>
       <a-entity gltf-model="#dumbcaneE" id="dumbcane5" scale="2 2 2" position="7.2 -1.6 11.4" shadow="cast: true"></a-entity>
@@ -201,10 +201,20 @@ Your browser does not support the audio element.
 
 	<!-- GOLD VIGNETTE OBJECTS -->
 
-	 <a-entity id="moonlight" light="type: point; intensity: 2" position="18 14 7"></a-entity>
-	<a-entity id="moundFire" light="type: point; intensity: 8; distance: 8; color: orange" position="17.8 10.15 10.5"></a-entity>
+	<a-box id="sea"
+               position="15 .2 15"
+               rotation="-90 0 0"
+               width="40"
+               height="10"
+		depth=".1"
+               color="#00aadd"
+		transparent="true"
+               shadow="receive: true">
+      	</a-box>
+	<a-entity id="moonlight" light="type: point; intensity: 10" position="13 33 35"></a-entity>
+	<a-entity id="midShipLight" light="type: point; intensity: 10; distance: 8; color: #ffffee" position="10 12 14.5"></a-entity>
 	<a-sphere id="moon" radius="1" position="22 15 5" color="white" emissive="#00eeff" emissive-intensity="0.7"></a-sphere>
-	<a-entity gltf-model="#pirateShip" id="ship" rotation="0 0 0" position="23.4 -1 14" scale="0.005 0.005 0.005"></a-entity>
+	<a-entity gltf-model="#pirateShip" id="ship" rotation="0 -80 0" position="18.3 -1 15.5" scale="0.005 0.005 0.005"></a-entity>
 	<a-entity gltf-model="#alligator" id="gator" rotation="0 -60 0" position="7 -1 -7" scale="2 2 2"></a-entity>
 	<a-entity id="gatorLight" light="type: point; intensity: 5" position="4.5 1 -7"></a-entity>
 	<a-entity gltf-model="#LeMoyneAlligator" id="leGator" rotation="0 180 0" position="1.5 2 -12.5" scale="1 1 1"></a-entity>

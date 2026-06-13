@@ -71,13 +71,13 @@
 	<a-plane nav-mesh position="0 1.05 0" rotation="-90 0 0" width="25" height="25" visible="false"></a-plane>
 	<a-entity light="type: ambient; intensity: 1; position: 0 0 5"></a-entity>
 	<a-entity light="type: directional; 
-		position: 4 5 8;
+		position: 4 5 11;
 		castShadow: true;
 		intensity: 0.8;
-		shadowCameraTop: 20;
-               shadowCameraBottom: -20;
-               shadowCameraRight: 20;
-               shadowCameraLeft: -20;
+		shadowCameraTop: 5;
+               shadowCameraBottom: -5;
+               shadowCameraRight: 5;
+               shadowCameraLeft: -5;
                shadowMapHeight: 2048;
                shadowMapWidth: 2048;"></a-entity>
 	<a-entity gltf-model="#sidewalk2" id="walk1" scale=".85 1 .85" position="4.2 -1 11.35" rotation="0 26.8 0" shadow="receive: true"></a-entity>
@@ -105,11 +105,11 @@
 	<a-entity gltf-model="#dumbcaneC" id="dumbcane3" scale="2 2 2" position="7.55 -1.6 12.1" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#dumbcaneD" id="dumbcane4" scale="2 2 2" position="7.3 -2.2 10.8" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#dumbcaneE" id="dumbcane5" scale="2 2 2" position="7.2 -1.6 11.4" shadow="receive: false"></a-entity>
-	<a-entity gltf-model="#parkBench" id="bench" rotation="0 29 0" scale="1.5 1.5 1.5" position="0.4 -1 11" shadow="cast: true; receive: false"></a-entity>
+	<a-entity gltf-model="#parkBench" id="bench" rotation="0 29 0" scale="1.5 1.5 1.5" position="0.4 -1 11" shadow="cast: true"></a-entity>
 	<a-entity gltf-model="#wasteBasket" id="basket1" rotation="0 70 0" scale="1.5 1.5 1.5" position="-1 -1 -13.6" shadow="cast: true" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#wasteBasket" id="basket2" rotation="0 0 0" scale="1.5 1.5 1.5" position="6.8 -1 11.4" shadow="cast: true" shadow="receive: false"></a-entity>
-	<a-entity gltf-model="#lightpole" id="pole1" rotation="0 120 0" scale="1.5 1.5 1.5" position="2 -1 13.5" shadow="receive: false"></a-entity>
-	<a-entity gltf-model="#lightpole" id="pole2" rotation="0 -120 0" scale="1.5 1.5 1.5" position="4.723 -1 -12.6" shadow="receive: false"></a-entity>
+	<a-entity gltf-model="#lightpole" id="pole1" rotation="0 120 0" scale="1.5 1.5 1.5" position="2 -1 13.5" shadow="cast: true"></a-entity>
+	<a-entity gltf-model="#lightpole" id="pole2" rotation="0 -120 0" scale="1.5 1.5 1.5" position="4.723 -1 -12.6" shadow="cast: true"></a-entity>
 	<a-entity gltf-model="#SOFsculpture" id="SOF" rotation="0 95 0" position="0 -1 0" scale="1.4 1.4 1.4" shadow="cast: true"></a-entity>
   
     </a-scene>

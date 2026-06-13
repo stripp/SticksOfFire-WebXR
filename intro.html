@@ -67,7 +67,7 @@
  <!-- ENVIRONMENT -->
 
       <a-sphere position="0 1 0" rotation="0 45 0" radius="15" src="#plantPark" material="side: back; shader: flat" metadata="unlit" shadow="cast: false"></a-sphere>
-      <a-plane position="0 -1 0" rotation="-90 0 0" width="40" height="40" color="#bbff00" src="#grassBase" repeat="20 20" normal-map="#grassNormal" normal-texture-repeat="20 20" roughness="0.8" shadow="receive: true"></a-plane>
+      <a-plane position="0 -1 0" rotation="-90 0 0" width="40" height="40" color="#bbff00" src="#grassBase" repeat="20 20" normal-map="#grassNormal" normal-texture-repeat="20 20" roughness="0.8" shadow="receive: true; cast: false"></a-plane>
 	<a-plane nav-mesh position="0 1.05 0" rotation="-90 0 0" width="25" height="25" visible="false"></a-plane>
 	<a-entity light="type: ambient; intensity: 4; position: 0 0 5"></a-entity>
 	<a-entity light="type: directional; 
@@ -105,7 +105,7 @@
 	<a-entity gltf-model="#dumbcaneC" id="dumbcane3" scale="2 2 2" position="7.55 -1.6 12.1" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#dumbcaneD" id="dumbcane4" scale="2 2 2" position="7.3 -2.2 10.8" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#dumbcaneE" id="dumbcane5" scale="2 2 2" position="7.2 -1.6 11.4" shadow="receive: false"></a-entity>
-	<a-entity gltf-model="#parkBench" id="bench" rotation="0 29 0" scale="1.5 1.5 1.5" position="0.4 -1 11" shadow="receive: false"></a-entity>
+	<a-entity gltf-model="#parkBench" id="bench" rotation="0 29 0" scale="1.5 1.5 1.5" position="0.4 -1 11" shadow="cast: true; receive: false"></a-entity>
 	<a-entity gltf-model="#wasteBasket" id="basket1" rotation="0 70 0" scale="1.5 1.5 1.5" position="-1 -1 -13.6" shadow="cast: true" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#wasteBasket" id="basket2" rotation="0 0 0" scale="1.5 1.5 1.5" position="6.8 -1 11.4" shadow="cast: true" shadow="receive: false"></a-entity>
 	<a-entity gltf-model="#lightpole" id="pole1" rotation="0 120 0" scale="1.5 1.5 1.5" position="2 -1 13.5" shadow="receive: false"></a-entity>

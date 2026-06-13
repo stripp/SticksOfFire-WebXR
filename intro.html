@@ -70,8 +70,8 @@
       <a-plane id="ground" position="0 -1 0" rotation="-90 0 0" width="40" height="40" color="#bbff00" src="#grassBase" repeat="20 20" normal-map="#grassNormal" normal-texture-repeat="20 20" roughness="0.8" shadow="receive: true; cast: false"></a-plane>
 	<a-plane id="nav" nav-mesh position="0 -0.8 0" rotation="-90 0 0" width="25" height="25" visible="false" shadow="receive: false; cast: false"></a-plane>
 	<a-entity id="amb" light="type: ambient; intensity: 4; position: 0 6 0"></a-entity>
-	<a-entity id="sunlight" light="type: directional; 
-		position: 4 5 11;
+	<a-entity id="sunlight" 
+		light="type: directional; 
 		castShadow: true;
 		intensity: 3;
 		shadowCameraTop: 20;
@@ -79,7 +79,8 @@
                shadowCameraRight: 20;
                shadowCameraLeft: -20;
                shadowMapHeight: 1024;
-               shadowMapWidth: 1024;"></a-entity>
+               shadowMapWidth: 1024"
+		position="4 5 11"></a-entity>
 	<a-entity gltf-model="#sidewalk2" id="walk1" scale=".85 1 .85" position="4.2 -1 11.35" rotation="0 26.8 0" shadow="receive: true"></a-entity>
 	<a-entity gltf-model="#sidewalk2" id="walk2" scale=".85 1 .85" position="1.727 -1 -12" rotation="0 162 0" shadow="receive: true"></a-entity>
 	<a-entity gltf-model="#sidewalk2" id="walk3" scale=".85 1 .85" position="-10 -1 -0.5" rotation="0 270 0" shadow="receive: true"></a-entity>

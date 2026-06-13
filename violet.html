@@ -119,10 +119,10 @@
       </a-plane>
 
       <!-- LIGHTING -->
-      <a-entity id="amb" light="type: ambient; intensity: .8" position="0 6 0"></a-entity>
+      <a-entity id="amb" light="type: ambient; intensity: .3" position="0 6 0"></a-entity>
 
       <a-entity id="sunlight" light="type: directional;
-                       intensity: .5;
+                       intensity: .2;
                        castShadow: true;
                        shadowMapHeight: 2048;
                        shadowMapWidth: 2048"
@@ -196,8 +196,8 @@ Your browser does not support the audio element.
 
 	<!-- VIOLET VIGNETTE OBJECTS -->
 
-	 <a-entity id="moonlight" light="type: point; intensity: 0.8" position="18 14 7"></a-entity>
-	<a-entity id="moundFire" light="type: point; intensity: 1.2; color: orange" position="18 14 7"></a-entity>
+	 <a-entity id="moonlight" light="type: point; intensity: 2" position="18 14 7"></a-entity>
+	<a-entity id="moundFire" light="type: point; intensity: 5; color: orange" position="17.8 10.15 10.5"></a-entity>
 	<a-sphere id="moon" radius="1" position="22 15 5" color="white" emissive="#00eeff" emissive-intensity="0.7"></a-sphere>
 	<a-entity gltf-model="#shellMound" id="mound" rotation="0 65 0" position="23.4 -1 14" scale=".7 .7 .7"></a-entity>
 

@@ -203,18 +203,19 @@ Your browser does not support the audio element.
 
 	<a-box id="sea"
                position="15 .2 15"
-               rotation="-90 0 0"
-               width="40"
-               height="10"
+               rotation="-90 59 0"
+               width="80"
+               height="20"
 		depth=".1"
                color="#00aadd"
 		transparent="true"
-               shadow="receive: true">
+               shadow="receive: true;
+		cast: false">
       	</a-box>
 	<a-entity id="moonlight" light="type: point; intensity: 10" position="13 33 35"></a-entity>
 	<a-entity id="midShipLight" light="type: point; intensity: 10; distance: 8; color: #ffffee" position="10 12 14.5"></a-entity>
-	<a-sphere id="moon" radius="1" position="22 15 5" color="white" emissive="#00eeff" emissive-intensity="0.7"></a-sphere>
-	<a-entity gltf-model="#pirateShip" id="ship" rotation="0 -80 0" position="18.3 -1 15.5" scale="0.005 0.005 0.005"></a-entity>
+	<a-sphere id="moon" radius="1" position="15 15 40" color="white" emissive="#00eeff" emissive-intensity="0.7"></a-sphere>
+	<a-entity gltf-model="#pirateShip" id="ship" rotation="0 -80 0" position="18.3 -1.5 15.5" scale="0.005 0.005 0.005"></a-entity>
 	<a-entity gltf-model="#alligator" id="gator" rotation="0 -60 0" position="7 -1 -7" scale="2 2 2"></a-entity>
 	<a-entity id="gatorLight" light="type: point; intensity: 5" position="4.5 1 -7"></a-entity>
 	<a-entity gltf-model="#LeMoyneAlligator" id="leGator" rotation="0 180 0" position="1.5 2 -12.5" scale="1 1 1"></a-entity>

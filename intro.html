@@ -69,11 +69,11 @@
       <a-sphere position="0 1 0" rotation="0 45 0" radius="15" src="#plantPark" material="side: back; shader: flat" metadata="unlit" shadow="cast: false"></a-sphere>
       <a-plane position="0 -1 0" rotation="-90 0 0" width="40" height="40" color="#bbff00" src="#grassBase" repeat="20 20" normal-map="#grassNormal" normal-texture-repeat="20 20" roughness="0.8" shadow="receive: true; cast: false"></a-plane>
 	<a-plane nav-mesh position="0 1.05 0" rotation="-90 0 0" width="25" height="25" visible="false"></a-plane>
-	<a-entity light="type: ambient; intensity: 4; position: 0 0 5"></a-entity>
+	<a-entity light="type: ambient; intensity: 1; position: 0 0 5"></a-entity>
 	<a-entity light="type: directional; 
-		position: 4 5 11;
+		position: 4 5 8;
 		castShadow: true;
-		intensity: 3;
+		intensity: 0.8;
 		shadowCameraTop: 20;
                shadowCameraBottom: -20;
                shadowCameraRight: 20;

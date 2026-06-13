@@ -72,13 +72,14 @@
 
       <!-- ENVIRONMENT -->
 
-      <!-- Background dome (now emissive so it matches lighting) -->
+      <!-- Background dome (fixed fuck-ups caused by ChatGPT, including adding emissive, which was totally incorrect) -->
       <a-sphere id="background"
                 position="0 1 0"
                 rotation="0 45 0"
                 radius="15"
                 src="#plantPark"
-                material="side: back; shader: standard; emissive: #ffffff; emissiveIntensity: 0.35"
+                material="side: back; shader: flat"
+		metadata="unlit"
                 shadow="receive: false; cast: false">
       </a-sphere>
 

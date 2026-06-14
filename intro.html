@@ -23,6 +23,7 @@
         <img id="plantPark" src="images/background.png">
         <img id="grassBase" src="images/uncutGrassB.png">
         <img id="grassNormal" src="images/uncutGrassN.png">
+	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" preload="auto"></audio>
 
         <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
         <a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pole.glb"></a-asset-item>
@@ -126,7 +127,7 @@
 
 	<!-- AUDIO -->
  
-	<a-sound src="src: url(https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3)" autoplay="true" loop="true" position="0 2 0"></a-sound>
+	<a-entity sound="src: #parkAmbient; autoplay: true; loop: true; refDistance: 20" position="0 2 0"></a-sound>
 
       <!-- SCENE OBJECTS -->
       <a-entity gltf-model="#sidewalk2" id="walk1" scale=".85 1 .85" position="4.2 -1 11.35" rotation="0 26.8 0" shadow="receive: true"></a-entity>

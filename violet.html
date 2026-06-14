@@ -213,7 +213,55 @@ Your browser does not support the audio element.
 	<a-entity gltf-model="#fireScene" id="cooking" rotation="0 0 0" position="-15 -1 0.5" scale="2 2 2"></a-entity>
 	<a-entity id="cookingLight" light="type: point; decay: 1; distance: 10: intensity: 10; color: orange" position="-15 .02 .8"></a-entity>
 
+	<!-- VIOLET VIGNETTE TEXT -->
 
+	<a-entity id="moundText" text="
+
+value: Engravings by Theodor DeBry (1591) \n
+depict people around a small shell mound. \n
+Along Florida's Gulf Coast, these \n
+shell mounds were enormous, reaching\n 
+heights of nearly 30 feet. Florida's pre-\n
+Columbian inhabitants included Timucuan-\n
+speaking tribes in the north and Calusa \n
+tribes further south, with possible \n
+overlaps around what is now Tampa. \n
+One legend suggests that Tan-pa is a \n
+Calusa word that refers to the area's \n
+abundance of kindling, or 'sticks of fire.';
+
+	align: left;
+	baseline: bottom;
+	color: white"
+
+	position="-9 .5 -9"
+	rotation="0 50 0"
+	scale="4 4 4">
+	</a-entity>
+
+	<a-entity id="gatorText" text="
+
+value: Nearly all images of Timucuan-speaking\n
+people are based on DeBry's 1591\n
+engravings, which in turn come from\n
+images that French painter Jacques \n
+Le Moyne de Morgues produced from \n
+memory decades after his voyage to \n
+Florida. Lemoyne's depiction of\n
+alligators alone leaves one to \n
+ponder the gaps between his \n
+representations and the people\n
+who vanished from Florida centuries \n
+ago, taking their stories with them.;
+
+	align: left;
+	baseline: bottom;
+	color: white"
+
+	position="9 .5 -9"
+	rotation="0 -40 0"
+	scale="4 4 4">
+	</a-entity>
 
     </a-scene>
   </body>

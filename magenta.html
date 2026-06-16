@@ -14,12 +14,52 @@
 <script>
 // SPE compatibility patch for A-Frame 1.7.1 (THREE r173)
 
-// A-Frame 1.7.1 exposes THREE.MathUtils.generateUUID,
-// but SPE expects THREE.Math.generateUUID.
-// So we alias it safely.
+// A-Frame's THREE doesn't define THREE.Math, but SPE expects
+// THREE.Math.generateUUID(). So we create a minimal THREE.Math
+// and give it a UUID generator.
 
-if (THREE && THREE.Math && !THREE.Math.generateUUID) {
-  THREE.Math.generateUUID = THREE.MathUtils.generateUUID;
+if (window.THREE) {
+  if (!THREE.Math) {
+    THREE.Math = {};
+  }
+
+  if (!THREE.Math.generateUUID) {
+    // Simple UUID v4 generator (good enough for SPE emitter IDs)
+    THREE.Math.generateUUID = (function () {
+      const lut = [];
+      for (let i = 0; i < 256; i++) {
+        lut[i] = (i < 16 ? '0' : '') + i.toString(16);
+      }
+      return function () {
+        const d0 = (Math.random() * 0xffffffff) | 0;
+        const d1 = (Math.random() * 0xffffffff) | 0;
+        const d2 = (Math.random() * 0xffffffff) | 0;
+        const d3 = (Math.random() * 0xffffffff) | 0;
+        return (
+          lut[d0 & 0xff] +
+          lut[(d0 >> 8) & 0xff] +
+          lut[(d0 >> 16) & 0xff] +
+          lut[(d0 >> 24) & 0xff] +
+          '-' +
+          lut[d1 & 0xff] +
+          lut[(d1 >> 8) & 0xff] +
+          '-' +
+          lut[((d1 >> 16) & 0x0f) | 0x40] +
+          lut[(d1 >> 24) & 0xff] +
+          '-' +
+          lut[(d2 & 0x3f) | 0x80] +
+          lut[(d2 >> 8) & 0xff] +
+          '-' +
+          lut[(d2 >> 16) & 0xff] +
+          lut[(d2 >> 24) & 0xff] +
+          lut[d3 & 0xff] +
+          lut[(d3 >> 8) & 0xff] +
+          lut[(d3 >> 16) & 0xff] +
+          lut[(d3 >> 24) & 0xff]
+        );
+      };
+    })();
+  }
 }
 </script>
 
@@ -256,7 +296,8 @@ if (THREE && THREE.Math && !THREE.Math.generateUUID) {
 	<a-ocean color="#114444" depth="1" width="40" position="0 -.5 0" rotation="-90 0 0" scale="1 40 1"></a-ocean>
 	
 	<!-- RAIN -->
-	<a-entity id="rain" particle-system="
+	
+	<!-- <a-entity id="rain" particle-system="
  	preset: rain;
   	particleCount: 60000;
   	type: 1;
@@ -279,20 +320,22 @@ if (THREE && THREE.Math && !THREE.Math.generateUUID) {
 
 	<a-entity id="rain" spe-particles="
  	 particleCount: 30000;
-	  texture: none;
- 	 type: 1;                     /* 1 = rain */
+ 	 distribution: BOX;
+
  	 position: 0 25 0;
-	  positionSpread: 20 0 20;     /* covers ~40 x 40 */
+ 	 positionSpread: 20 0 20;
 
- 	 velocity: -15 -40 0;         /* diagonal: left + down */
- 	 velocitySpread: 5 10 5;
+	  velocity: -20 -45 0;
+	  velocitySpread: 5 10 5;
 
- 	 acceleration: -5 -60 0;      /* keeps pushing it down and sideways */
- 	 accelerationSpread: 5 10 5;
+ 	 acceleration: -10 -70 0;
+	  accelerationSpread: 5 10 5;
 
-	  maxAge: 1.2;
+ 	 maxAge: 1.2;
 	  size: 0.08;
+	  color: #88aaff;
 	"></a-entity>
+
 
 
 

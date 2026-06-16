@@ -9,7 +9,72 @@
    <script src="javascript/aframe-extras.min.js"></script>
 
     <!-- A-Frame Particle System Component for rain -->
-   <script src="javascript/aframe-particle-system-component.min.js"></script> 
+   <!-- <script src="javascript/aframe-particle-system-component.min.js"></script> -->
+
+<script>
+// three-compat-spe.js
+
+// 1. Provide THREE.Math.generateUUID if missing or moved
+if (!THREE.Math.generateUUID) {
+  THREE.Math.generateUUID = (function () {
+    // simple UUID v4 fallback
+    const lut = [];
+    for (let i = 0; i < 256; i++) {
+      lut[i] = (i < 16 ? '0' : '') + i.toString(16);
+    }
+    return function () {
+      const d0 = (Math.random() * 0xffffffff) | 0;
+      const d1 = (Math.random() * 0xffffffff) | 0;
+      const d2 = (Math.random() * 0xffffffff) | 0;
+      const d3 = (Math.random() * 0xffffffff) | 0;
+      return (
+        lut[d0 & 0xff] +
+        lut[(d0 >> 8) & 0xff] +
+        lut[(d0 >> 16) & 0xff] +
+        lut[(d0 >> 24) & 0xff] +
+        '-' +
+        lut[d1 & 0xff] +
+        lut[(d1 >> 8) & 0xff] +
+        '-' +
+        lut[((d1 >> 16) & 0x0f) | 0x40] +
+        lut[(d1 >> 24) & 0xff] +
+        '-' +
+        lut[(d2 & 0x3f) | 0x80] +
+        lut[(d2 >> 8) & 0xff] +
+        '-' +
+        lut[(d2 >> 16) & 0xff] +
+        lut[(d2 >> 24) & 0xff] +
+        lut[d3 & 0xff] +
+        lut[(d3 >> 8) & 0xff] +
+        lut[(d3 >> 16) & 0xff] +
+        lut[(d3 >> 24) & 0xff]
+      );
+    };
+  })();
+}
+
+// 2. Emulate THREE.Geometry using BufferGeometry
+if (!THREE.Geometry) {
+  THREE.Geometry = class Geometry extends THREE.BufferGeometry {
+    constructor() {
+      super();
+      this.vertices = []; // some old code may poke this
+    }
+  };
+}
+
+// 3. Alias addAttribute → setAttribute for old code
+if (!THREE.BufferGeometry.prototype.addAttribute &&
+    THREE.BufferGeometry.prototype.setAttribute) {
+  THREE.BufferGeometry.prototype.addAttribute = function (name, attr) {
+    this.setAttribute(name, attr);
+    return this;
+  };
+}
+</script>
+
+
+    <script src="javascript/aframe-spe-particles-component.min.js"></script>
 
   </head>
 
@@ -261,7 +326,25 @@
 
 	drag: 0;
 	dragSpread: 0;
+	"></a-entity> -->
+
+	<a-entity id="rain" spe-particles="
+ 	 particleCount: 30000;
+	  texture: none;
+ 	 type: 1;                     /* 1 = rain */
+ 	 position: 0 25 0;
+	  positionSpread: 20 0 20;     /* covers ~40 x 40 */
+
+ 	 velocity: -15 -40 0;         /* diagonal: left + down */
+ 	 velocitySpread: 5 10 5;
+
+ 	 acceleration: -5 -60 0;      /* keeps pushing it down and sideways */
+ 	 accelerationSpread: 5 10 5;
+
+	  maxAge: 1.2;
+	  size: 0.08;
 	"></a-entity>
+
 
 
 	<!-- MAGENTA VIGNETTE TEXT -->

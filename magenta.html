@@ -58,6 +58,7 @@
 	<a-asset-item id="Milton" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Milton.glb"></a-asset-item>
 	<a-asset-item id="garbage" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Trashbag.glb"></a-asset-item>
 	<a-asset-item id="jug" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/TrashJug.glb"></a-asset-item>
+	<a-asset-item id="bolt" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bolt.glb"></a-asset-item>
 
       </a-assets>
 
@@ -241,29 +242,14 @@
 	  to: 3.05 -.2 8;
 	  loop: true"></a-entity>
 	<a-ocean color="#114444" depth="1" width="40" position="0 -.5 0" rotation="-90 0 0" scale="1 40 1"></a-ocean>
+
+<!-- Lightning Meshes -->
+
+	<a-entity gltf-model="#bolt" id="bolt1" rotation="0 0 0" position="-25 5 -25" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#bolt" id="bolt2" rotation="0 0 0" position="-25 5 0" scale="1 1 1"></a-entity>
+
 	
 	<!-- RAIN -->
-	
-	<!-- <a-entity id="rain" particle-system="
- 	preset: rain;
-  	particleCount: 60000;
-  	type: 1;
-  	color: #88aaff;
-  	size: 0.06;
- 	 maxAge: 1.2;
-
-  	position: 0 40 0;
-  	spread: 90 0 90;
-
- 	 velocity: 0 -45 0;
- 	 velocitySpread: 5 5 5;
-
- 	 acceleration: 0 -60 0;
- 	 accelerationSpread: 10 0 10;
-
-	drag: 0;
-	dragSpread: 0;
-	"></a-entity> -->
 
 <a-entity id="rain"
   particle-system="
@@ -289,8 +275,6 @@
   "
   position="0 20 0"
 ></a-entity>
-
-
 
 
 	<!-- MAGENTA VIGNETTE TEXT -->

@@ -20,7 +20,6 @@
       xr-mode-ui="enabled: true"
       webxr="optionalFeatures: hand-tracking, layers"
       inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
-      rain
     >
 
       <!-- ASSETS -->
@@ -131,10 +130,10 @@
       </a-plane>
 
       <!-- LIGHTING -->
-      <a-entity id="amb" light="type: ambient; intensity: .3" position="0 6 0"></a-entity>
+      <a-entity id="amb" light="type: ambient; intensity: 1" position="0 6 0"></a-entity>
 
       <a-entity id="sunlight" light="type: directional;
-                       intensity: .2;
+                       intensity: .5;
                        castShadow: true;
                        shadowMapHeight: 2048;
                        shadowMapWidth: 2048"

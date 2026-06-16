@@ -12,67 +12,16 @@
    <!-- <script src="javascript/aframe-particle-system-component.min.js"></script> -->
 
 <script>
-// three-compat-spe.js
+// SPE compatibility patch for A-Frame 1.7.1 (THREE r173)
 
-// 1. Provide THREE.Math.generateUUID if missing or moved
-if (!THREE.Math.generateUUID) {
-  THREE.Math.generateUUID = (function () {
-    // simple UUID v4 fallback
-    const lut = [];
-    for (let i = 0; i < 256; i++) {
-      lut[i] = (i < 16 ? '0' : '') + i.toString(16);
-    }
-    return function () {
-      const d0 = (Math.random() * 0xffffffff) | 0;
-      const d1 = (Math.random() * 0xffffffff) | 0;
-      const d2 = (Math.random() * 0xffffffff) | 0;
-      const d3 = (Math.random() * 0xffffffff) | 0;
-      return (
-        lut[d0 & 0xff] +
-        lut[(d0 >> 8) & 0xff] +
-        lut[(d0 >> 16) & 0xff] +
-        lut[(d0 >> 24) & 0xff] +
-        '-' +
-        lut[d1 & 0xff] +
-        lut[(d1 >> 8) & 0xff] +
-        '-' +
-        lut[((d1 >> 16) & 0x0f) | 0x40] +
-        lut[(d1 >> 24) & 0xff] +
-        '-' +
-        lut[(d2 & 0x3f) | 0x80] +
-        lut[(d2 >> 8) & 0xff] +
-        '-' +
-        lut[(d2 >> 16) & 0xff] +
-        lut[(d2 >> 24) & 0xff] +
-        lut[d3 & 0xff] +
-        lut[(d3 >> 8) & 0xff] +
-        lut[(d3 >> 16) & 0xff] +
-        lut[(d3 >> 24) & 0xff]
-      );
-    };
-  })();
-}
+// A-Frame 1.7.1 exposes THREE.MathUtils.generateUUID,
+// but SPE expects THREE.Math.generateUUID.
+// So we alias it safely.
 
-// 2. Emulate THREE.Geometry using BufferGeometry
-if (!THREE.Geometry) {
-  THREE.Geometry = class Geometry extends THREE.BufferGeometry {
-    constructor() {
-      super();
-      this.vertices = []; // some old code may poke this
-    }
-  };
-}
-
-// 3. Alias addAttribute → setAttribute for old code
-if (!THREE.BufferGeometry.prototype.addAttribute &&
-    THREE.BufferGeometry.prototype.setAttribute) {
-  THREE.BufferGeometry.prototype.addAttribute = function (name, attr) {
-    this.setAttribute(name, attr);
-    return this;
-  };
+if (THREE && THREE.Math && !THREE.Math.generateUUID) {
+  THREE.Math.generateUUID = THREE.MathUtils.generateUUID;
 }
 </script>
-
 
     <script src="javascript/aframe-spe-particles-component.min.js"></script>
 

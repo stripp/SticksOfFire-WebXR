@@ -12,69 +12,67 @@
    <!-- <script src="javascript/aframe-particle-system-component.min.js"></script> -->
 
 <script>
-AFRAME.registerComponent('rain-shader', {
+AFRAME.registerShader('rain-sky', {
   schema: {
-    intensity: {default: 1.0},     // overall density
-    speed:     {default: 1.0},     // fall speed
-    angle:     {default: 0.6},     // diagonal tilt (0 = vertical, 1 = sideways)
-    brightness:{default: 0.8},     // how bright the streaks appear
+    time:      {type: 'time', is: 'uniform'},
+    intensity: {default: 1.2},
+    speed:     {default: 2.0},
+    angle:     {default: 0.7},   // 0 = vertical, 1 = very diagonal
+    brightness:{default: 1.0}
   },
 
-  init: function () {
-    this.material = new THREE.ShaderMaterial({
-      transparent: true,
-      depthWrite: false,
-      uniforms: {
-        time:      {value: 0},
-        intensity: {value: this.data.intensity},
-        speed:     {value: this.data.speed},
-        angle:     {value: this.data.angle},
-        brightness:{value: this.data.brightness}
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec2 vUv;
-        uniform float time;
-        uniform float intensity;
-        uniform float speed;
-        uniform float angle;
-        uniform float brightness;
-
-        float rand(vec2 n) {
-          return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
-        }
-
-        void main() {
-          vec2 uv = vUv;
-
-          // tilt the rain diagonally
-          uv.x += angle * (uv.y + time * speed);
-
-          float drops = fract(uv.y * 50.0 + rand(vec2(uv.x, floor(uv.y * 50.0))));
-          float streak = smoothstep(0.0, 0.1, drops) * brightness;
-
-          gl_FragColor = vec4(vec3(streak), streak * intensity);
-        }
-      `
-    });
-
-    this.el.getObject3D('mesh').material = this.material;
-  },
-
-  tick: function (t) {
-    if (this.material) {
-      this.material.uniforms.time.value = t / 1000;
+  vertexShader: `
+    varying vec3 vWorldPos;
+    void main() {
+      vec4 worldPos = modelMatrix * vec4(position, 1.0);
+      vWorldPos = worldPos.xyz;
+      gl_Position = projectionMatrix * viewMatrix * worldPos;
     }
-  }
+  `,
+
+  fragmentShader: `
+    varying vec3 vWorldPos;
+    uniform float time;
+    uniform float intensity;
+    uniform float speed;
+    uniform float angle;
+    uniform float brightness;
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    }
+
+    void main() {
+      // world-space position, scaled to control pattern size
+      vec3 p = vWorldPos;
+      p.xz *= 0.15;
+      p.y  *= 0.5;
+
+      float t = time * speed;
+
+      // project along a diagonal direction
+      float diag = p.y + angle * p.x + t;
+
+      // cell-based randomization
+      vec2 cell = floor(vec2(p.x * 10.0, diag * 10.0));
+      float rnd = hash(cell);
+
+      // position within the streak
+      float line = fract(diag * 10.0 + rnd * 10.0);
+
+      // shape the streak
+      float streak = smoothstep(0.0, 0.15, 1.0 - line);
+      streak *= brightness;
+
+      float alpha = streak * intensity;
+
+      if (alpha < 0.02) discard;
+
+      gl_FragColor = vec4(vec3(streak), alpha);
+    }
+  `
 });
 </script>
-
 
   </head>
 
@@ -169,7 +167,11 @@ AFRAME.registerComponent('rain-shader', {
 
 	<!-- SKY -->
 
-	<a-sky color="#111"></a-sky>
+<a-sky
+  material="shader: rain-sky; intensity: 1.2; speed: 2.0; angle: 0.7; brightness: 1.0"
+  color="#111">
+</a-sky>
+
 
       <!-- Ground -->
       <a-plane id="ground"
@@ -328,15 +330,6 @@ AFRAME.registerComponent('rain-shader', {
 	drag: 0;
 	dragSpread: 0;
 	"></a-entity> -->
-
-<a-entity id="rain"
-  geometry="primitive: plane; width: 2; height: 2"
-  material="shader: flat; transparent: true"
-  rain-shader="intensity: 1.2; speed: 2.0; angle: 0.7; brightness: 1.0"
-  position="0 1.6 -1.5"
-  scale="4 4 4"
-></a-entity>
-
 
 
 	<!-- MAGENTA VIGNETTE TEXT -->

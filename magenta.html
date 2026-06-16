@@ -11,7 +11,7 @@
     <!-- A-Frame Particle System Component for rain -->
    <!-- <script src="javascript/aframe-particle-system-component.min.js"></script> -->
 
-    <script src="javascript/aframe-rain.min.js"></script>
+    <script src="javascript/aframe-spe-particles-component.min.js"></script>
 
   </head>
 
@@ -267,7 +267,34 @@
 	dragSpread: 0;
 	"></a-entity> -->
 
-	<a-entity id="rain" rain="count: 2000; size: 0.2; speed: 20; area: 40 40"></a-entity>
+	<a-entity id="rain"
+  position="0 25 0"
+ 
+ spe-particles="
+    particleCount: 20000;
+    texture: none;
+    type: 1;
+    maxAge: 1.2;
+
+    // distribution
+    distribution: BOX;
+    positionSpread: 40 0 40;
+
+    // diagonal rain direction
+    velocity: -4 -35 0;
+    velocitySpread: 2 10 2;
+
+    // gravity-like acceleration
+    acceleration: -2 -60 0;
+    accelerationSpread: 1 10 1;
+
+    // appearance
+    size: 0.08;
+    color: #88aaff;
+    opacity: 0.9;
+  "
+></a-entity>
+
 
 
 

@@ -3,15 +3,13 @@
     <title>Sticks of Fire – Magenta Vignette</title>
 
     <!-- A‑Frame Core -->
-     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
 
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
 
     <!-- A-Frame Particle System Component for rain -->
-   <!-- <script src="javascript/aframe-particle-system-component.min.js"></script> -->
-
-    <script src="javascript/aframe-spe-particles-component.min.js"></script>
+   <script src="javascript/aframe-particle-system-component.min.js"></script> 
 
   </head>
 
@@ -267,32 +265,29 @@
 	dragSpread: 0;
 	"></a-entity> -->
 
-	<a-entity id="rain"
-  position="0 25 0"
- 
- spe-particles="
-    particleCount: 20000;
-    texture: none;
-    type: 1;
+<a-entity id="rain"
+  particle-system="
+    preset: rain;
+    particleCount: 8000;
+    size: 0.15;
     maxAge: 1.2;
 
-    // distribution
-    distribution: BOX;
+    // spawn area
     positionSpread: 40 0 40;
 
-    // diagonal rain direction
-    velocity: -4 -35 0;
-    velocitySpread: 2 10 2;
+    // diagonal wind
+    velocityValue: -2 -25 0;
+    velocitySpread: 1 5 1;
 
-    // gravity-like acceleration
-    acceleration: -2 -60 0;
-    accelerationSpread: 1 10 1;
+    // gravity-like pull
+    accelerationValue: -1 -40 0;
+    accelerationSpread: 0.5 10 0.5;
 
     // appearance
-    size: 0.08;
     color: #88aaff;
     opacity: 0.9;
   "
+  position="0 20 0"
 ></a-entity>
 
 

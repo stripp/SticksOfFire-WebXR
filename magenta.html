@@ -11,66 +11,70 @@
     <!-- A-Frame Particle System Component for rain -->
    <!-- <script src="javascript/aframe-particle-system-component.min.js"></script> -->
 
-	<script>
-// SPE compatibility patch for A-Frame 1.7.1 (THREE r173)
+<script>
+AFRAME.registerComponent('rain-shader', {
+  schema: {
+    intensity: {default: 1.0},     // overall density
+    speed:     {default: 1.0},     // fall speed
+    angle:     {default: 0.6},     // diagonal tilt (0 = vertical, 1 = sideways)
+    brightness:{default: 0.8},     // how bright the streaks appear
+  },
 
-if (window.THREE) {
-  // 1. Minimal THREE.Math with generateUUID for SPE.Group
-  if (!THREE.Math) {
-    THREE.Math = {};
-  }
+  init: function () {
+    this.material = new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      uniforms: {
+        time:      {value: 0},
+        intensity: {value: this.data.intensity},
+        speed:     {value: this.data.speed},
+        angle:     {value: this.data.angle},
+        brightness:{value: this.data.brightness}
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform float time;
+        uniform float intensity;
+        uniform float speed;
+        uniform float angle;
+        uniform float brightness;
 
-  if (!THREE.Math.generateUUID) {
-    const lut = [];
-    for (let i = 0; i < 256; i++) {
-      lut[i] = (i < 16 ? '0' : '') + i.toString(16);
+        float rand(vec2 n) {
+          return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+        }
+
+        void main() {
+          vec2 uv = vUv;
+
+          // tilt the rain diagonally
+          uv.x += angle * (uv.y + time * speed);
+
+          float drops = fract(uv.y * 50.0 + rand(vec2(uv.x, floor(uv.y * 50.0))));
+          float streak = smoothstep(0.0, 0.1, drops) * brightness;
+
+          gl_FragColor = vec4(vec3(streak), streak * intensity);
+        }
+      `
+    });
+
+    this.el.getObject3D('mesh').material = this.material;
+  },
+
+  tick: function (t) {
+    if (this.material) {
+      this.material.uniforms.time.value = t / 1000;
     }
-    THREE.Math.generateUUID = function () {
-      const d0 = (Math.random() * 0xffffffff) | 0;
-      const d1 = (Math.random() * 0xffffffff) | 0;
-      const d2 = (Math.random() * 0xffffffff) | 0;
-      const d3 = (Math.random() * 0xffffffff) | 0;
-      return (
-        lut[d0 & 0xff] +
-        lut[(d0 >> 8) & 0xff] +
-        lut[(d0 >> 16) & 0xff] +
-        lut[(d0 >> 24) & 0xff] +
-        '-' +
-        lut[d1 & 0xff] +
-        lut[(d1 >> 8) & 0xff] +
-        '-' +
-        lut[((d1 >> 16) & 0x0f) | 0x40] +
-        lut[(d1 >> 24) & 0xff] +
-        '-' +
-        lut[(d2 & 0x3f) | 0x80] +
-        lut[(d2 >> 8) & 0xff] +
-        '-' +
-        lut[(d2 >> 16) & 0xff] +
-        lut[(d2 >> 24) & 0xff] +
-        lut[d3 & 0xff] +
-        lut[(d3 >> 8) & 0xff] +
-        lut[(d3 >> 16) & 0xff] +
-        lut[(d3 >> 24) & 0xff]
-      );
-    };
   }
-
-  // 2. Alias addAttribute -> setAttribute for BufferGeometry
-  if (
-    THREE.BufferGeometry &&
-    !THREE.BufferGeometry.prototype.addAttribute &&
-    THREE.BufferGeometry.prototype.setAttribute
-  ) {
-    THREE.BufferGeometry.prototype.addAttribute = function (name, attr) {
-      this.setAttribute(name, attr);
-      return this;
-    };
-  }
-}
+});
 </script>
 
-
-    <script src="javascript/aframe-spe-particles-component.min.js"></script>
 
   </head>
 
@@ -325,26 +329,13 @@ if (window.THREE) {
 	dragSpread: 0;
 	"></a-entity> -->
 
-	<a-entity id="rain"
-  position="0 25 0"
-  spe-particles="
-    particleCount: 30000;
-    distribution: BOX;
-
-    positionSpread: 20 0 20;
-
-    velocity: -20 -45 0;
-    velocitySpread: 5 10 5;
-
-    acceleration: -10 -70 0;
-    accelerationSpread: 5 10 5;
-
-    maxAge: 1.2;
-    size: 0.08;
-    color: #88aaff;
-  "
+<a-entity id="rain"
+  geometry="primitive: plane; width: 2; height: 2"
+  material="shader: flat; transparent: true"
+  rain-shader="intensity: 1.2; speed: 2.0; angle: 0.7; brightness: 1.0"
+  position="0 1.6 -1.5"
+  scale="4 4 4"
 ></a-entity>
-
 
 
 

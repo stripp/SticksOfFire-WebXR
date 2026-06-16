@@ -8,6 +8,9 @@
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
 
+    <!-- Rain script by takahirox -->
+   <script src="javascript/aframe-rain.min.js"></script>
+
 
   </head>
 
@@ -210,6 +213,8 @@
 	<a-entity gltf-model="#jug" id="plasticJug" rotation="0 180 45" position="1 -.2 8.5" scale="1 1 1"></a-entity>
 	<a-entity gltf-model="#garbage" id="trashBag" rotation="60 180 0" position="3 -.5 8" scale="1 1 1"></a-entity>
 	<a-ocean color="#114444" depth="1" width="40" position="0 -.5 0" rotation="-90 0 0" scale="1 40 1"></a-ocean>
+	 <a-entity rain="count: 5000; areaWidth: 20; areaDepth: 20; dropHeight: 10; speed: 20"></a-entity>
+
 
 
 	<!-- MAGENTA VIGNETTE TEXT -->

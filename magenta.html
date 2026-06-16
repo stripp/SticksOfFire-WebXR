@@ -11,6 +11,51 @@
     <!-- A-Frame Particle System Component for rain -->
    <script src="javascript/aframe-particle-system-component.min.js"></script> 
 
+<script>
+AFRAME.registerComponent('lightning-flash', {
+  schema: {
+    minDelay: {type: 'number', default: 2000},   // minimum time between flashes
+    maxDelay: {type: 'number', default: 6000},   // maximum time between flashes
+    flashDuration: {type: 'number', default: 120}, // how long bolt is visible
+    flashCount: {type: 'number', default: 2}      // number of flickers per strike
+  },
+
+  init: function () {
+    this.scheduleFlash();
+  },
+
+  scheduleFlash: function () {
+    const delay = Math.random() * 
+      (this.data.maxDelay - this.data.minDelay) + this.data.minDelay;
+
+    setTimeout(() => this.doFlash(), delay);
+  },
+
+  doFlash: function () {
+    const el = this.el;
+    let flashes = 0;
+
+    const flicker = () => {
+      el.setAttribute('visible', true);
+
+      setTimeout(() => {
+        el.setAttribute('visible', false);
+        flashes++;
+
+        if (flashes < this.data.flashCount) {
+          setTimeout(flicker, Math.random() * 80);
+        } else {
+          this.scheduleFlash();
+        }
+      }, this.data.flashDuration);
+    };
+
+    flicker();
+  }
+});
+</script>
+
+
   </head>
 
   <body>
@@ -245,8 +290,16 @@
 
 <!-- Lightning Meshes -->
 
-	<a-entity gltf-model="#bolt" id="bolt1" rotation="0 0 0" position="-25 5 -25" scale="1 1 1"></a-entity>
-	<a-entity gltf-model="#bolt" id="bolt2" rotation="0 0 0" position="-25 5 0" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#bolt" id="bolt1"
+          lightning-flash="minDelay:1500; maxDelay:5000; flashCount:3"
+          rotation="0 0 0" position="-25 5 -25" scale="1 1 1">
+	</a-entity>
+
+	<a-entity gltf-model="#bolt" id="bolt2"
+          lightning-flash="minDelay:2000; maxDelay:7000; flashCount:2"
+          rotation="0 0 0" position="-25 5 0" scale="1 1 1">
+	</a-entity>
+
 
 	
 	<!-- RAIN -->

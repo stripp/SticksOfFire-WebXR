@@ -55,6 +55,31 @@ AFRAME.registerComponent('lightning-flash', {
 });
 </script>
 
+<script>
+AFRAME.registerComponent('force-emissive', {
+  schema: {
+    color: {default: '#ffffff'},
+    intensity: {default: 8}
+  },
+
+  init: function () {
+    this.el.addEventListener('model-loaded', () => {
+      const mesh = this.el.getObject3D('mesh');
+      if (!mesh) return;
+
+      mesh.traverse(node => {
+        if (node.isMesh && node.material) {
+          node.material.emissive = new THREE.Color(this.data.color);
+          node.material.emissiveIntensity = this.data.intensity;
+          node.material.color = new THREE.Color('#ffffff');
+          node.material.needsUpdate = true;
+        }
+      });
+    });
+  }
+});
+</script>
+
 
   </head>
 
@@ -291,23 +316,20 @@ AFRAME.registerComponent('lightning-flash', {
 <!-- Lightning Meshes -->
 
 	<a-entity gltf-model="#strike" id="bolt1"
-	  color="#fff"
-	  emissive="8"
           lightning-flash="minDelay:1500; maxDelay:5000; flashCount:3"
+          force-emissive="color:#fff; intensity:10"
           rotation="0 0 0" position="-25 1 -25" scale="10 10 10">
 	</a-entity>
 
 	<a-entity gltf-model="#strike" id="bolt2"
-	  color="#fff"
- 	  emissive="8"
           lightning-flash="minDelay:2000; maxDelay:7000; flashCount:2"
+          force-emissive="color:#fff; intensity:10"
           rotation="0 0 0" position="8 1 25" scale="10 10 10">
 	</a-entity>
 
 	<a-entity gltf-model="#strike" id="bolt3"
-	  color="#fff"
-	  emissive="8"
           lightning-flash="minDelay:2000; maxDelay:7000; flashCount:2"
+          force-emissive="color:#fff; intensity:10"
           rotation="0 0 0" position="25 1 -5" scale="10 10 10">
 	</a-entity>
 

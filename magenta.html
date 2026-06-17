@@ -260,7 +260,7 @@ AFRAME.registerComponent('lightning-flash', {
 	  animation="property: position; 
 	  easing: easeInOutQuad; 
 	  dir: alternate; 
-	  dur: 1000; 
+	  dur: 2000; 
 	  to: 14.5 -0.7 11.1; 
 	  loop: true"></a-entity>
 	<a-entity gltf-model="#TanpaPlaque" id="plaque" rotation="0 180 0" position="14 2 -1.8" scale="1.5 1.5 1.5"></a-entity>
@@ -283,21 +283,23 @@ AFRAME.registerComponent('lightning-flash', {
 	  animation="property: position;
 	  easing: easeInOutQuad;
 	  dir: alternate;
-	  dur: 1000;
+	  dur: 1500;
 	  to: 3.05 -.2 8;
 	  loop: true"></a-entity>
-	<a-ocean color="#114444" depth="1" width="40" position="0 -.5 0" rotation="-90 0 0" scale="1 40 1"></a-ocean>
+	<a-ocean color="#114444" depth="1" width="40" opacity=".9" position="0 -.5 0" rotation="-90 0 0" scale="1 40 1"></a-ocean>
 
 <!-- Lightning Meshes -->
 
 	<a-entity gltf-model="#strike" id="bolt1"
+	  color="#fff"
           lightning-flash="minDelay:1500; maxDelay:5000; flashCount:3"
-          rotation="0 0 0" position="-25 5 -25" scale="1 1 1">
+          rotation="0 0 0" position="-25 1 -25" scale="5 5 5">
 	</a-entity>
 
 	<a-entity gltf-model="#strike" id="bolt2"
+	  color="#fff"
           lightning-flash="minDelay:2000; maxDelay:7000; flashCount:2"
-          rotation="0 0 0" position="-25 5 0" scale="1 1 1">
+          rotation="0 0 0" position="8 0 25" scale="5 5 5">
 	</a-entity>
 
 

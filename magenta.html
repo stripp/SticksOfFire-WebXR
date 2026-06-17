@@ -103,7 +103,7 @@ AFRAME.registerComponent('lightning-flash', {
 	<a-asset-item id="Milton" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Milton.glb"></a-asset-item>
 	<a-asset-item id="garbage" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Trashbag.glb"></a-asset-item>
 	<a-asset-item id="jug" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/TrashJug.glb"></a-asset-item>
-	<a-asset-item id="bolt" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/LightningBolt.glb"></a-asset-item>
+	<a-asset-item id="strike" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/LightningBolt.glb"></a-asset-item>
 
       </a-assets>
 
@@ -290,12 +290,12 @@ AFRAME.registerComponent('lightning-flash', {
 
 <!-- Lightning Meshes -->
 
-	<a-entity gltf-model="#bolt" id="bolt1"
+	<a-entity gltf-model="#strike" id="bolt1"
           lightning-flash="minDelay:1500; maxDelay:5000; flashCount:3"
           rotation="0 0 0" position="-25 5 -25" scale="1 1 1">
 	</a-entity>
 
-	<a-entity gltf-model="#bolt" id="bolt2"
+	<a-entity gltf-model="#strike" id="bolt2"
           lightning-flash="minDelay:2000; maxDelay:7000; flashCount:2"
           rotation="0 0 0" position="-25 5 0" scale="1 1 1">
 	</a-entity>

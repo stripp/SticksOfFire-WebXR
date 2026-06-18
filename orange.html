@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <title>Sticks of Fire – Orange Vignette</title>
+
+    <!-- A‑Frame Core -->
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+
+    <!-- Extras: nav-mesh + teleport -->
+   <script src="javascript/aframe-extras.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene
+      shadow="type: pcfsoft"
+      renderer="antialias: true; colorManagement: true; exposure: 1.2; toneMapping: ACESFilmic"
+      xr-mode-ui="enabled: true"
+      webxr="optionalFeatures: hand-tracking, layers"
+      inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
+    >
+
+      <!-- ASSETS -->
+      <a-assets>
+        <img id="plantPark" src="images/background.png">
+        <img id="grassBase" src="images/uncutGrassB.png">
+        <img id="grassNormal" src="images/uncutGrassN.png">
+	<audio id="orangeMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/orange.mp3" preload="auto"></audio>
+
+
+        <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
+        <a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pole.glb"></a-asset-item>
+        <a-asset-item id="wasteBasket" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/basket.glb"></a-asset-item>
+
+        <a-asset-item id="dumbcaneA" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneA.glb"></a-asset-item>
+        <a-asset-item id="dumbcaneB" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneB.glb"></a-asset-item>
+        <a-asset-item id="dumbcaneC" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneC.glb"></a-asset-item>
+        <a-asset-item id="dumbcaneD" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneD.glb"></a-asset-item>
+        <a-asset-item id="dumbcaneE" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneE.glb"></a-asset-item>
+
+        <a-asset-item id="taro" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/taro1.glb"></a-asset-item>
+        <a-asset-item id="palm1" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bottlePalm1.glb"></a-asset-item>
+        <a-asset-item id="palmetto" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/palmetto.glb"></a-asset-item>
+
+        <a-asset-item id="SOFsculpture" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/SOF_Lit.glb"></a-asset-item>
+        <a-asset-item id="sidewalk2" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/sidewalk5.glb"></a-asset-item>
+        <a-asset-item id="pedestal" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pedestal.glb"></a-asset-item>
+        <a-asset-item id="lowWall" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/parkWall2.glb"></a-asset-item>
+
+	<!-- ORANGE ASSETS -->
+
+	<a-asset item id="giantLock" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/GiantLock.glb"></a-asset-item>
+	<a-asset item id="quest" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Quest.glb"></a-asset-item>
+	<a-asset-item id="LockpicksReddit" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/LockpickReddit.glb"></a-asset-item>
+	<a-asset-item id="godsLockpicks" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/GodsLockpicks.glb"></a-asset-item>
+	<a-asset-item id="bookPillar" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bookPillar.glb"></a-asset-item>
+	<a-asset-item id="book" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/OpenBook.glb"></a-asset-item>
+	<a-asset-item id="stickPick" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Sculpture_Stick_Lockpick.glb"></a-asset-item>
+
+      </a-assets>
+
+      <!-- CAMERA RIG -->
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false" position="0 1.6 0" rotation="0 170 0">
+        <a-entity id="camera"
+                  camera
+                  look-controls="pointerLockEnabled: true"
+                  wasd-controls="acceleration: 20">
+        </a-entity>
+      </a-entity>
+
+      <!-- CONTROLLERS -->
+      <a-entity id="rightHand"
+                laser-controls="hand: right"
+                teleport-controls="
+                  cameraRig: #rig;
+                  teleportOrigin: #camera;
+                  button: trigger;
+                  type: parabolic;
+                  curveShootingSpeed: 6;">
+      </a-entity>
+
+      <a-entity id="leftHand" laser-controls="hand: left"></a-entity>
+
+      <!-- HAND TRACKING -->
+      <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity>
+
+      <!-- ENVIRONMENT -->
+
+      <!-- Background dome (removed for this scene)
+      <a-sphere id="background"
+                position="0 1 0"
+                rotation="0 45 0"
+                radius="15"
+                src="#plantPark"
+                material="side: back; shader: flat"
+		metadata="unlit"
+                shadow="receive: false; cast: false">
+
+      </a-sphere>
+	-->
+
+	<!-- SKY -->
+
+	<a-sky color="#111"></a-sky>
+
+      <!-- Ground -->
+      <a-plane id="ground"
+               position="0 -1 0"
+               rotation="-90 0 0"
+               width="40"
+               height="40"
+               src="#grassBase"
+               repeat="20 20"
+               normal-map="#grassNormal"
+               normal-texture-repeat="20 20"
+               roughness="0.8"
+               shadow="receive: true">
+      </a-plane>
+
+      <!-- Nav Mesh -->
+      <a-plane id="nav"
+               nav-mesh
+               position="0 -0.9 0"
+               rotation="-90 0 0"
+               width="25"
+               height="25"
+               visible="false">
+      </a-plane>
+
+      <!-- LIGHTING -->
+      <a-entity id="amb" light="type: ambient; intensity: .3" position="0 6 0"></a-entity>
+
+      <a-entity id="sunlight" light="type: directional;
+                       intensity: .2;
+                       castShadow: true;
+                       shadowMapHeight: 2048;
+                       shadowMapWidth: 2048"
+                position="4 5 11">
+      </a-entity>
+
+      <a-entity id="sidelight" light="type: hemisphere;
+                       intensity: 0.2;
+                       color: #ffffff"
+                	position="0 5 0">
+      </a-entity>
+
+	<!-- AUDIO -->
+ 
+	<a-entity sound="src: #orangeMusic; autoplay: true; loop: true; refDistance: 20; maxDistance: 2" position="0 2 0"></a-entity>
+
+
+      <!-- SCENE OBJECTS -->
+      <a-entity gltf-model="#sidewalk2" id="walk1" scale=".85 1 .85" position="4.2 -1 11.35" rotation="0 26.8 0" shadow="receive: true"></a-entity>
+      <a-entity gltf-model="#sidewalk2" id="walk2" scale=".85 1 .85" position="1.727 -1 -12" rotation="0 162 0" shadow="receive: true"></a-entity>
+      <a-entity gltf-model="#sidewalk2" id="walk3" scale=".85 1 .85" position="-10 -1 -0.5" rotation="0 270 0" shadow="receive: true"></a-entity>
+      <a-entity gltf-model="#sidewalk2" id="walk4" scale=".85 1 .85" position="10.5 -1 -1" rotation="0 90 0" shadow="receive: true"></a-entity>
+
+      <a-entity gltf-model="#pedestal" id="pedestal1" scale=".7 .7 .7" position="14.3 -1 -4.2" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#pedestal" id="pedestal2" scale=".7 .7 .7" position="14.85 -1 .53" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#pedestal" id="pedestal3" scale=".7 .7 .7" position="8.37 -1 12.84" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#pedestal" id="pedestal4" scale=".7 .7 .7" position="3.14 -1 14.9" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#pedestal" id="pedestal5" scale=".7 .7 .7" position="-14.7 -1 -2.47" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#pedestal" id="pedestal6" scale=".7 .7 .7" position="-14.5 -1 3.4" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#lowWall" id="wall1" position="11.7 -1 5.9" rotation="0 151 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#lowWall" id="wall2" scale="1.2 1.2 1.2" position="-6.4 -1 9.4" rotation="0 58 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#lowWall" id="wall3" position="9.9 -1 -8.6" rotation="0 45 0" shadow="cast: true"></a-entity>
+
+
+      <a-cylinder id="fountainWater"
+                  position="0 0.005 0"
+                  radius="4"
+                  height=".005"
+                  color="#00ccff"
+                  transparent="true"
+                  opacity="0.4">
+      </a-cylinder>
+
+      <a-entity gltf-model="#taro" id="taro1" scale="2 2 2" position="-12.3 -1 -3.85" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#taro" id="taro2" scale="2 2 2" position="-12.3 -1 3.1" rotation="0 60 0" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#palm1" id="palm1" scale="2 2 2" position="-11.5 -3 10" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#palm1" id="palm2" scale="2 2 2" position="-13.5 -2.81 7.5" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#palmetto" id="palmetto1" scale="1.5 1.5 1.5" position="-5.5 -1 -13.25" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#palmetto" id="palmetto2" scale="1.5 1.5 1.5" position=".8 -1.4 14.8" rotation="0 -35.5 0" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#dumbcaneA" id="dumbcane1" scale="3 3 3" position="7.7 -2.2 11.2" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#dumbcaneB" id="dumbcane2" scale="2 2 2" position="7 -1.6 11.3" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#dumbcaneC" id="dumbcane3" scale="2 2 2" position="7.55 -1.6 12.1" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#dumbcaneD" id="dumbcane4" scale="2 2 2" position="7.3 -2.2 10.8" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#dumbcaneE" id="dumbcane5" scale="2 2 2" position="7.2 -1.6 11.4" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#parkBench" id="bench" rotation="0 29 0" scale="1.5 1.5 1.5" position="0.4 -1 11" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#wasteBasket" id="basket1" rotation="0 70 0" scale="1.5 1.5 1.5" position="-1 -1 -13.6" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#wasteBasket" id="basket2" rotation="0 0 0" scale="1.5 1.5 1.5" position="6.8 -1 11.4" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#lightpole" id="pole1" rotation="0 120 0" scale="1.5 1.5 1.5" position="2 -1 13.5" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#lightpole" id="pole2" rotation="0 -120 0" scale="1.5 1.5 1.5" position="4.723 -1 -12.6" shadow="cast: true"></a-entity>
+
+      <a-entity gltf-model="#SOFsculpture" id="SOF" rotation="0 95 0" position="0 -1 0" scale="1.4 1.4 1.4" shadow="cast: true"></a-entity>
+
+	<!-- ORANGE VIGNETTE OBJECTS -->
+
+	<a-entity gltf=model="#giantLock" id="portalLock" rotation="0 0 0" position="-12 2 0" scale="3 3 3"></a-entity>
+	<a-entity gltf-model="#quest" id="headset" rotation="0 0 0" position="-9 2 0" scale="2.5 2.5 2.5"></a-entity>
+	<a-entity gltf-model="#LockpicksReddit" id="reddit" rotation="0 0 0" position="4 2 -9" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#godsLockpicks" id="godsPicks" rotation="0 0 0" position="2 2 -9" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#bookPillar" id="newWorld" rotation="0 0 0" position="-10 -1 -10" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#book" id="spellBook" rotation="0 0 0"position="-10 1 -10" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#stickPick" id="giantPick" rotation="0 0 0" position="-1 2 7" scale="1 1 1"></a-entity>
+
+	<!-- ORANGE VIGNETTE TEXT -->
+
+	<a-entity id="Dali" text="
+
+value: The artist, in the spirit of Salvador
+Dali's paranoic critical method, might
+propose that all the threads of the
+city's identity converge on this knot
+of knot-knowing that we call 'sticks of 
+fire.' ;
+
+	align: left;
+	baseline: bottom;
+	color: white"
+
+	position="-13.5 1 0"
+	rotation="0 0 0"
+	scale="4 4 4">
+	</a-entity>
+	<a-entity id="RedditSpec" text="
+
+value: What if we take seriously the musings \n
+on a Reddit thread that the steel\n
+sculpture at the center of Plant Park \n
+\nis at its essence the world's largest \n
+set of lock picks? What is locked? \n
+What mysteries might those outsized \n
+tools, when guided by skill and a little \n
+luck, reveal?;
+
+	align: left;
+	baseline: bottom;
+	color: white"
+
+	position="5.2 .5 14"
+	rotation="0 -150 0"
+	scale="4 4 4">
+	</a-entity>
+
+    </a-scene>
+  </body>
+</html>

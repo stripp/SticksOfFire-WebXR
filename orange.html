@@ -23,7 +23,7 @@
         <img id="plantPark" src="images/background.png">
         <img id="grassBase" src="images/uncutGrassB.png">
         <img id="grassNormal" src="images/uncutGrassN.png">
-	<audio id="orangeMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/orange.mp3" preload="auto"></audio>
+	<audio id="orangeMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/orange.mp3" crossorigin="anonymous" preload="auto"></audio>
 
 
         <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
@@ -202,13 +202,13 @@
 
 	<!-- ORANGE VIGNETTE OBJECTS -->
 
-	<a-entity gltf=model="#giantLock" id="portalLock" rotation="0 0 0" position="-12 2 0" scale="3 3 3"></a-entity>
-	<a-entity gltf-model="#quest" id="headset" rotation="0 0 0" position="-9 2 0" scale="2.5 2.5 2.5"></a-entity>
-	<a-entity gltf-model="#LockpicksReddit" id="reddit" rotation="0 0 0" position="4 2 -9" scale="1 1 1"></a-entity>
-	<a-entity gltf-model="#godsLockpicks" id="godsPicks" rotation="0 0 0" position="2 2 -9" scale="1 1 1"></a-entity>
-	<a-entity gltf-model="#bookPillar" id="newWorld" rotation="0 0 0" position="-10 -1 -10" scale="1 1 1"></a-entity>
-	<a-entity gltf-model="#book" id="spellBook" rotation="0 0 0"position="-10 1 -10" scale="1 1 1"></a-entity>
-	<a-entity gltf-model="#stickPick" id="giantPick" rotation="0 0 0" position="-1 2 7" scale="1 1 1"></a-entity>
+	<a-entity gltf=model="#giantLock" id="portalLock" rotation="0 0 0" position="2 2 -15" scale="5 5 5"></a-entity>
+	<a-entity gltf-model="#quest" id="headset" rotation="0 180 0" position="0 2 -7" scale="2.5 2.5 2.5"></a-entity>
+	<a-entity gltf-model="#LockpicksReddit" id="reddit" rotation="0 -90 0" position="13 2 -2.9" scale="1.5 1.5 1.5"></a-entity>
+	<a-entity gltf-model="#godsLockpicks" id="godsPicks" rotation="0 -90 -10" position="12.95 1.5 0" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#bookPillar" id="bookPlinth" rotation="0 35 0" position="-8 -1 -9" scale="1 1 1"></a-entity>
+	<a-entity gltf-model="#book" id="spellBook" rotation="0 -55 0"position="-10 1 -10" scale="2.5 2.5 2.5"></a-entity>
+	<a-entity gltf-model="#stickPick" id="giantPick" rotation="180 90 -120" position="5 0 0" scale="1 1 1"></a-entity>
 
 	<!-- ORANGE VIGNETTE TEXT -->
 
@@ -226,7 +226,7 @@ fire.' ;
 	color: white"
 
 	position="-13.5 1 0"
-	rotation="0 0 0"
+	rotation="0 90 0"
 	scale="4 4 4">
 	</a-entity>
 	<a-entity id="RedditSpec" text="
@@ -234,7 +234,7 @@ fire.' ;
 value: What if we take seriously the musings \n
 on a Reddit thread that the steel\n
 sculpture at the center of Plant Park \n
-\nis at its essence the world's largest \n
+is at its essence the world's largest \n
 set of lock picks? What is locked? \n
 What mysteries might those outsized \n
 tools, when guided by skill and a little \n

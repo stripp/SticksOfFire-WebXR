@@ -88,7 +88,7 @@ AFRAME.registerComponent('billboard', {
         <img id="plantPark" src="images/background.png">
         <img id="grassBase" src="images/uncutGrassB.png">
         <img id="grassNormal" src="images/uncutGrassN.png">
-	<audio id="violetMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/violet.mp3" preload="auto"></audio>
+	<audio id="violetMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/violet.mp3" crossorigin="anonymous" preload="auto"></audio>
 
 
         <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
@@ -279,6 +279,7 @@ AFRAME.registerComponent('billboard', {
 	<a-entity gltf-model="#LeMoyneMound" id="leMound" rotation="0 -30 0" position="-4.5 2 10" scale="1.5 1.5 1.5"></a-entity>
 	<a-entity gltf-model="#fireScene" id="cooking" rotation="0 180 0" position="-13.5 -1 0.25" scale="2.5 2.5 2.5"></a-entity>
 	<a-plane
+	 id="campfire"
  	 position="-13.5 -90 1"
  	 width="2"
 	  height="2"

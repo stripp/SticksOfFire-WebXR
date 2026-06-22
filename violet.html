@@ -119,7 +119,7 @@ AFRAME.registerComponent('billboard', {
 	<a-asset-item id="LeMoyneMound" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/LeMoyneMound.glb"></a-asset-item>
 	<a-asset-item id="fireScene" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/fireScene.glb"></a-asset-item>
 	<a-assets>
-  	<img id="bonfireSheet" src="images/bonefire3.PNG">
+  	<img id="bonfireSheet" src="images/bonefire3.png">
 	</a-assets>	
 
       </a-assets>
@@ -280,9 +280,9 @@ AFRAME.registerComponent('billboard', {
 	<a-entity gltf-model="#LeMoyneMound" id="leMound" rotation="0 -30 0" position="-4.5 2 10" scale="1.5 1.5 1.5"></a-entity>
 	<a-entity gltf-model="#fireScene" id="cooking" rotation="0 180 0" position="-13.5 -1 0.25" scale="2.5 2.5 2.5"></a-entity>
 	<a-plane
- 	 position="-13.5 -.08 0.25"
- 	 width="1"
-	  height="1"
+ 	 position="-13.5 -90 1"
+ 	 width="2"
+	  height="2"
 	  spritesheet-animation="src: #bonfireSheet; fps: 16; randomStart: true"
  	 billboard>
 	</a-plane>

@@ -7,6 +7,71 @@
 
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
+
+    <script>
+AFRAME.registerComponent('spritesheet-animation', {
+  schema: {
+    rows: { type: 'int', default: 4 },
+    cols: { type: 'int', default: 8 },
+    fps:  { type: 'number', default: 12 },
+    src:  { type: 'selector' },
+    randomStart: { type: 'boolean', default: true }
+  },
+
+  init: function () {
+    const data = this.data;
+    const el = this.el;
+
+    el.setAttribute('material', {
+      src: data.src,
+      transparent: true,
+      shader: 'flat',
+      repeat: { x: 1 / data.cols, y: 1 / data.rows }
+    });
+
+    this.totalFrames = data.rows * data.cols;
+
+    // Randomized start frame
+    this.frame = data.randomStart
+      ? Math.floor(Math.random() * this.totalFrames)
+      : 0;
+
+    this.frameDuration = 1000 / data.fps;
+    this.lastTime = 0;
+  },
+
+  tick: function (time) {
+    if (time - this.lastTime < this.frameDuration) return;
+    this.lastTime = time;
+
+    this.frame = (this.frame + 1) % this.totalFrames;
+
+    const col = this.frame % this.data.cols;
+    const row = Math.floor(this.frame / this.data.cols);
+
+    const mesh = this.el.getObject3D('mesh');
+    if (!mesh) return;
+
+    mesh.material.map.offset.set(
+      col / this.data.cols,
+      1 - (row + 1) / this.data.rows
+    );
+  }
+});
+</script>
+
+<script>
+AFRAME.registerComponent('billboard', {
+  tick: function () {
+    const cam = this.el.sceneEl.camera;
+    if (!cam) return;
+
+    const obj = this.el.object3D;
+    obj.lookAt(cam.position);
+  }
+});
+</script>
+
   </head>
 
   <body>
@@ -52,6 +117,7 @@
 	<a-asset-item id="GasparillaPhoto" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/GasparillaPhoto.glb"></a-asset-item>
 	<a-asset-item id="GasparillaHollis" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/GasparillaHollis.glb"></a-asset-item>
 	<a-asset-item id="PirateBooty" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pirateBooty.glb"></a-asset-item>	
+	<img id="candleFlame" src="images\CandleFire_D.png">
 
       </a-assets>
 
@@ -220,6 +286,14 @@
 	<a-entity gltf-model="#GasparillaHollis" id="GaspHollis" rotation="0 -85 0" position="13.5 2 -1.5" scale="1.5 1.5 1.5"></a-entity>
 	<a-entity gltf-model="#PirateBooty" id="pirateChest" rotation="0 0 0" position="3 -1 -14" scale="2 2 2"></a-entity>
 	<a-entity id="candleLight" light="type: point; decay: 1; distance: 10: intensity: 8; color: orange" position="1.5 3.43 -14"></a-entity>
+	<a-plane
+	 id="flame"
+ 	 position="1.5 3 -14"
+ 	 width=".1"
+	  height=".2"
+	  spritesheet-animation="src: #candleFlame; fps: 16; randomStart: true"
+ 	 billboard>
+	</a-plane>
 
 	<!-- GOLD TEXT -->
 

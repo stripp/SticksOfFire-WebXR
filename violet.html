@@ -7,6 +7,71 @@
 
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
+
+    <script>
+AFRAME.registerComponent('spritesheet-animation', {
+  schema: {
+    rows: { type: 'int', default: 8 },
+    cols: { type: 'int', default: 8 },
+    fps:  { type: 'number', default: 12 },
+    src:  { type: 'selector' },
+    randomStart: { type: 'boolean', default: true }
+  },
+
+  init: function () {
+    const data = this.data;
+    const el = this.el;
+
+    el.setAttribute('material', {
+      src: data.src,
+      transparent: true,
+      shader: 'flat',
+      repeat: { x: 1 / data.cols, y: 1 / data.rows }
+    });
+
+    this.totalFrames = data.rows * data.cols;
+
+    // Randomized start frame
+    this.frame = data.randomStart
+      ? Math.floor(Math.random() * this.totalFrames)
+      : 0;
+
+    this.frameDuration = 1000 / data.fps;
+    this.lastTime = 0;
+  },
+
+  tick: function (time) {
+    if (time - this.lastTime < this.frameDuration) return;
+    this.lastTime = time;
+
+    this.frame = (this.frame + 1) % this.totalFrames;
+
+    const col = this.frame % this.data.cols;
+    const row = Math.floor(this.frame / this.data.cols);
+
+    const mesh = this.el.getObject3D('mesh');
+    if (!mesh) return;
+
+    mesh.material.map.offset.set(
+      col / this.data.cols,
+      1 - (row + 1) / this.data.rows
+    );
+  }
+});
+</script>
+
+<script>
+AFRAME.registerComponent('billboard', {
+  tick: function () {
+    const cam = this.el.sceneEl.camera;
+    if (!cam) return;
+
+    const obj = this.el.object3D;
+    obj.lookAt(cam.position);
+  }
+});
+</script>
+
   </head>
 
   <body>
@@ -211,6 +276,13 @@
 	<a-entity gltf-model="#LeMoyneFeast" id="leFeast" rotation="0 -120 0" position="-9 2 -9" scale="1.5 1.5 1.5"></a-entity>
 	<a-entity gltf-model="#LeMoyneMound" id="leMound" rotation="0 -30 0" position="-4.5 2 10" scale="1.5 1.5 1.5"></a-entity>
 	<a-entity gltf-model="#fireScene" id="cooking" rotation="0 180 0" position="-13.5 -1 0.25" scale="2.5 2.5 2.5"></a-entity>
+	<a-plane
+ 	 position="-13.5 -.08 0.25"
+ 	 width="1"
+	  height="1"
+	  spritesheet-animation="src: #bonfireSheet; fps: 16; randomStart: true"
+ 	 billboard>
+	</a-plane>
 	<a-entity id="cookingLight" light="type: point; decay: 1; distance: 10: intensity: 10; color: orange" position="-13.5 .075 .1"></a-entity>
 
 	<!-- VIOLET VIGNETTE TEXT -->

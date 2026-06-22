@@ -11,6 +11,35 @@
     <!-- A-Frame Particle System Component -->
    <script src="javascript/aframe-particle-system-component.min.js"></script> 
 
+    <script>
+      AFRAME.registerComponent('texture-cycle', {
+        schema: {
+          images: { type: 'array' },
+          interval: { type: 'number', default: 500 }
+        },
+
+        init: function () {
+          this.index = 0;
+
+          // Set initial texture
+          this.el.setAttribute('material', 'src', `#${this.data.images[0]}`);
+
+          this.startCycle();
+        },
+
+        startCycle: function () {
+          this.intervalId = setInterval(() => {
+            this.index = (this.index + 1) % this.data.images.length;
+            this.el.setAttribute('material', 'src', `#${this.data.images[this.index]}`);
+          }, this.data.interval);
+        },
+
+        remove: function () {
+          clearInterval(this.intervalId);
+        }
+      });
+    </script>
+
   </head>
 
   <body>
@@ -58,6 +87,10 @@
 	<a-asset-item id="bookPillar" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bookPillar.glb"></a-asset-item>
 	<a-asset-item id="book" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/OpenBook.glb"></a-asset-item>
 	<a-asset-item id="stickPick" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Sculpture_Stick_Lockpick.glb"></a-asset-item>
+	<img id="frame1" src="images/portal1.png">
+	<img id="frame2" src="images/portal2.png">
+	<img id="frame3" src="images/portal3.png">
+	<img id="frame4" src="images/portal4.png">
 
       </a-assets>
 
@@ -232,7 +265,7 @@
 	  position="1 3.1 -14.5"
 	  rotation="0 0 0"
 	  scale="9 9 9"
-	  src="images/portal1.png"
+	  texture-cycle="images: frame1, frame2, frame3, frame4; interval: 400"
 	  repeat="1 1"
 	  transparent="true">
 	</a-plane>

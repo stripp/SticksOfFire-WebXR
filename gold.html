@@ -67,6 +67,19 @@ AFRAME.registerComponent('spritesheet-animation', {
     );
   }
 });
+</script>
+
+<script>
+AFRAME.registerComponent('billboard', {
+  tick: function () {
+    const cam = this.el.sceneEl.camera;
+    if (!cam) return;
+
+    const obj = this.el.object3D;
+    obj.lookAt(cam.position);
+  }
+});
+</script>
 
   </head>
 

@@ -76,9 +76,20 @@ AFRAME.registerComponent('billboard', {
     if (!cam) return;
 
     const obj = this.el.object3D;
-    obj.lookAt(cam.position);
+
+    const camPos = new THREE.Vector3();
+    cam.getWorldPosition(camPos);
+
+    const objPos = new THREE.Vector3();
+    obj.getWorldPosition(objPos);
+
+    // Lock vertical rotation
+    camPos.y = objPos.y;
+
+    obj.lookAt(camPos);
   }
 });
+
 </script>
 
   </head>

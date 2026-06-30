@@ -106,7 +106,7 @@ p {
       <a-sphere id="studioBG"
                 position="0 1 0"
                 rotation="0 0 0"
-                radius="5"
+                radius="4"
                 src="#studio"
                 material="side: back; shader: flat"
 		metadata="unlit"
@@ -129,10 +129,11 @@ p {
 
       <!-- LIGHTING -->
       <a-entity id="ambLight" light="type: ambient; intensity: 4" position="0 0 0"></a-entity>
+      <a-entity id="point" light="type: point; intensity: 3" position="-0.8 2 -2"></a-entity>
 
       <!-- SCENE OBJECTS -->
-      <a-entity gltf-model="#chair" id="armchair" scale="1 1 1" position="2 -1 2" rotation="0 0 0" shadow="cast: true"></a-entity>
-      <a-entity gltf-model="#table" id="smallTable" scale="1 1 1" position="3 -1 3" rotation="0 0 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#chair" id="armchair" scale="1 1 1" position="0.5 -1 -1.75" rotation="0 -15 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#table" id="smallTable" scale="1 1 1" position="-0.8 -1 -2" rotation="0 15 0" shadow="cast: true"></a-entity>
 
     </a-scene>
 

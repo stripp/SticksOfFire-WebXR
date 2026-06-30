@@ -30,11 +30,13 @@ p {
   margin: 40px auto;
   line-height: 1.6;
   padding: 0 20px;
+  padding-bottom: 50px;
 }
 
   #VR-scene {
     width: 900px;
     height: 600px;
+    align: center;
     border: 2px solid #444;
     overflow: hidden; /* optional */
   }
@@ -51,7 +53,6 @@ p {
 
 <h1>WebXR VR Demo</h1>
 <p>A quick demo of proof of concept of embedded WebXR using A-Frame.</p>
-<h2>Demo</h2>
 
 <div id="VR-scene">
 
@@ -66,7 +67,7 @@ p {
       <!-- ASSETS -->
       <a-assets>
         <img id="studio" src="images/studio-4k.png">
-        <img id="carpetBase" src="images/carpetRedB.jpg">
+        <img id="carpetBase" src="images/carpetBuffB.jpg">
         <img id="carpetNormal" src="images/carpetN.png">
 
         <a-asset-item id="chair" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/chair.glb"></a-asset-item>
@@ -132,14 +133,14 @@ p {
 
       <!-- LIGHTING -->
       <a-entity id="ambLight" light="type: ambient; intensity: 4" position="0 0 0"></a-entity>
-      <a-entity id="point" light="type: point; intensity: 3" position="-0.8 3.2 -2"></a-entity>
+      <a-entity id="point" light="type: point; intensity: 5" position="-0.8 3.2 -2"></a-entity>
 
       <!-- SCENE OBJECTS -->
       <a-entity gltf-model="#chair" id="armchair" scale="1 1 1" position="0.5 -1 -1.75" rotation="0 -15 0" shadow="cast: true"></a-entity>
       <a-entity gltf-model="#table" id="smallTable" scale="1 1 1" position="-0.8 -1 -2" rotation="0 15 0" shadow="cast: true; receive: true"></a-entity>
-      <a-entity gltf-model="#chandelier" id="lightfixture" scale="1 1 1" position="-0.8 4 -2" rotation="0 0 0" shadow="cast: true"></a-entity>
-      <a-entity gltf-model="#vase" id="antiqueVase" scale="1 1 1" position="-0.8 1 -2" rotation="0 0 0" shadow="cast: true"></a-entity>
-      <a-entity gltf-model="#plant" id="pottedPlant" scale="1 1 1" position="2 -1 2" rotation="0 0 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#chandelier" id="lightfixture" scale="1 1 1" position="0 4 0" rotation="0 0 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#vase" id="antiqueVase" scale="1 1 1" position="-0.8 -0.26 -2" rotation="0 0 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#plant" id="pottedPlant" scale="1 1 1" position="-1.5 -1 2.5" rotation="0 0 0" shadow="cast: true"></a-entity>
 
     </a-scene>
 

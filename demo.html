@@ -66,11 +66,14 @@ p {
       <!-- ASSETS -->
       <a-assets>
         <img id="studio" src="images/studio-4k.png">
-        <img id="carpetBase" src="images/carpetB.jpg">
+        <img id="carpetBase" src="images/carpetRedB.jpg">
         <img id="carpetNormal" src="images/carpetN.png">
 
         <a-asset-item id="chair" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/chair.glb"></a-asset-item>
         <a-asset-item id="table" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/table.glb"></a-asset-item>
+        <a-asset-item id="plant" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pottedPlant.glb"></a-asset-item>
+        <a-asset-item id="chandelier" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/chandelier.glb"></a-asset-item>
+        <a-asset-item id="vase" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/vase.glb"></a-asset-item>
 
       </a-assets>
 
@@ -129,11 +132,14 @@ p {
 
       <!-- LIGHTING -->
       <a-entity id="ambLight" light="type: ambient; intensity: 4" position="0 0 0"></a-entity>
-      <a-entity id="point" light="type: point; intensity: 3" position="-0.8 2 -2"></a-entity>
+      <a-entity id="point" light="type: point; intensity: 3" position="-0.8 3.2 -2"></a-entity>
 
       <!-- SCENE OBJECTS -->
       <a-entity gltf-model="#chair" id="armchair" scale="1 1 1" position="0.5 -1 -1.75" rotation="0 -15 0" shadow="cast: true"></a-entity>
-      <a-entity gltf-model="#table" id="smallTable" scale="1 1 1" position="-0.8 -1 -2" rotation="0 15 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#table" id="smallTable" scale="1 1 1" position="-0.8 -1 -2" rotation="0 15 0" shadow="cast: true; receive: true"></a-entity>
+      <a-entity gltf-model="#chandelier" id="lightfixture" scale="1 1 1" position="-0.8 4 -2" rotation="0 0 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#vase" id="antiqueVase" scale="1 1 1" position="-0.8 1 -2" rotation="0 0 0" shadow="cast: true"></a-entity>
+      <a-entity gltf-model="#plant" id="pottedPlant" scale="1 1 1" position="2 -1 2" rotation="0 0 0" shadow="cast: true"></a-entity>
 
     </a-scene>
 

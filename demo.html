@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demo</title>
 
- <link rel="stylesheet" href="css/style.css">
-
     <!-- A‑Frame Core -->
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
 
@@ -14,9 +12,29 @@
    <script src="javascript/aframe-extras.min.js"></script>
 
 <style>
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 2.2rem;	
+  padding: 0;
+  color: #333
+}
+
+p {
+  font-family: Georgia, serif;
+  background-color: var(--light-gray-bg); /* lighter, cleaner */
+  color: #222;
+  max-width: 800px;
+  margin: 40px auto;
+  line-height: 1.6;
+  padding: 0 20px;
+}
+
   #VR-scene {
-    width: 600px;
-    height: 400px;
+    width: 900px;
+    height: 600px;
     border: 2px solid #444;
     overflow: hidden; /* optional */
   }
@@ -101,15 +119,12 @@
                rotation="-90 0 0"
                width="10"
                height="10"
-               src="#parquetBase"
-               repeat="20 20"
-               normal-map="#parquetNormal"
-               normal-texture-repeat="20 20"
-               shadow="receive: true">
+	       visibility="false"
+>
       </a-plane>
 
       <!-- LIGHTING -->
-      <a-entity id="ambLight" light="type: ambient; intensity: 2" position="0 6 0"></a-entity>
+      <a-entity id="ambLight" light="type: ambient; intensity: 4" position="0 0 0"></a-entity>
 
       <!-- SCENE OBJECTS -->
       <a-entity gltf-model="#chair" id="armchair" scale="1 1 1" position="2 -1 2" rotation="0 0 0" shadow="cast: true"></a-entity>

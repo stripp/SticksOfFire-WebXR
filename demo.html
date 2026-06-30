@@ -66,8 +66,8 @@ p {
       <!-- ASSETS -->
       <a-assets>
         <img id="studio" src="images/studio-4k.png">
-        <img id="parquetBase" src="images/parquet_B.jpg">
-        <img id="parquetNormal" src="images/parquet_N.png">
+        <img id="carpetBase" src="images/carpetB.jpg">
+        <img id="carpetNormal" src="images/carpetN.png">
 
         <a-asset-item id="chair" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/chair.glb"></a-asset-item>
         <a-asset-item id="table" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/table.glb"></a-asset-item>
@@ -75,7 +75,7 @@ p {
       </a-assets>
 
       <!-- CAMERA RIG -->
-      <a-entity id="rig" movement-controls="speed: 0.15; fly: false" position="0 1.6 0" rotation="0 10 0">
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false" position="0 1.1 0" rotation="0 10 0">
         <a-entity id="camera"
                   camera
                   look-controls="pointerLockEnabled: true"
@@ -115,12 +115,16 @@ p {
 
       <!-- Ground -->
       <a-plane id="floor"
-               position="0 -1 0"
+               position="0 -1 1"
                rotation="-90 0 0"
                width="10"
                height="10"
-	       visibility="false"
->
+	       src="#carpetBase"
+               repeat="5 5"
+               normal-map="#carpetNormal"
+               normal-texture-repeat="5 5"
+               roughness="0.8"
+               shadow="receive: true">
       </a-plane>
 
       <!-- LIGHTING -->

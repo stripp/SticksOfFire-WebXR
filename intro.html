@@ -12,7 +12,7 @@
   <body>
     <a-scene
       shadow="type: pcfsoft"
-      renderer="antialias: true; colorManagement: true; exposure: 1.2; toneMapping: ACESFilmic"
+      renderer="antialias: true; colorManagement: false; exposure: 1.0; toneMapping: None"
       xr-mode-ui="enabled: true"
       webxr="optionalFeatures: hand-tracking, layers"
       inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
@@ -23,7 +23,7 @@
         <img id="plantPark" src="images/background.png">
         <img id="grassBase" src="images/uncutGrassB.png">
         <img id="grassNormal" src="images/uncutGrassN.png">
-	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" preload="auto"></audio>
+	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" crossorigin="anonymous" preload="auto"></audio>
 
         <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
         <a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pole.glb"></a-asset-item>
@@ -50,7 +50,8 @@
         <a-entity id="camera"
                   camera
                   look-controls="pointerLockEnabled: true"
-                  wasd-controls="acceleration: 20">
+                  wasd-controls="acceleration: 20"
+		  nav-agent="navmesh: #navmesh">
         </a-entity>
       </a-entity>
 
@@ -99,14 +100,12 @@
       </a-plane>
 
       <!-- Nav Mesh -->
-      <a-plane id="nav"
-               nav-mesh
+      <a-entity id="navmesh"
+               geometry="primitive: plane; width: 25; height: 25"
                position="0 -0.9 0"
                rotation="-90 0 0"
-               width="25"
-               height="25"
                visible="false">
-      </a-plane>
+      </a-entity>
 
       <!-- LIGHTING -->
       <a-entity id="amb" light="type: ambient; intensity: 2" position="0 6 0"></a-entity>

@@ -3,7 +3,7 @@
     <title>Sticks of Fire – Gold Vignette</title>
 
     <!-- A‑Frame Core -->
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
@@ -97,8 +97,9 @@ AFRAME.registerComponent('billboard', {
 
   <body>
     <a-scene
-      shadow="type: pcfsoft"
-      renderer="antialias: true; colorManagement: true; exposure: 1.2; toneMapping: ACESFilmic"
+      shadow="type: pcf"
+      renderer="antialias: true"
+      reflection="directionalLight: a-light#sunlight"
       xr-mode-ui="enabled: true"
       webxr="optionalFeatures: hand-tracking, layers"
       inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"

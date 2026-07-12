@@ -93,6 +93,8 @@
         <img id="carpetBase" src="images/carpetPinkB.jpg">
         <img id="carpetNormal" src="images/carpetN.png">
 
+	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>
+
         <a-asset-item id="chair" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/chair.glb"></a-asset-item>
         <a-asset-item id="table" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/table.glb"></a-asset-item>
         <a-asset-item id="plant" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pottedPlant.glb"></a-asset-item>
@@ -152,6 +154,17 @@
                roughness="0.8"
                shadow="receive: true">
       </a-plane>
+
+
+      <!-- Nav Mesh -->
+      <a-entity gltf-model="#navmesh"
+	       id="nav"
+	       scale="0.7 1 0.7"
+               position="0 -2 0"
+               rotation="0 0 0"
+   	       visible="false">
+      </a-entity>
+
 
       <!-- LIGHTING -->
       <a-entity id="ambLight" light="type: ambient; intensity: 4" position="0 0 0"></a-entity>

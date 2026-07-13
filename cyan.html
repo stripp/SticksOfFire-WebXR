@@ -3,11 +3,27 @@
     <title>Sticks of Fire – Cyan Vignette</title>
 
     <!-- A‑Frame Core -->
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
   </head>
+
+    <!-- Pause sound until all is loaded -->
+  <script>
+    AFRAME.registerComponent('start-audio-on-vr', {
+      init: function () {
+        this.el.sceneEl.addEventListener('enter-vr', () => {
+          // Explicitly resume the browser's audio context first
+          if (THREE.AudioContext.getContext().state === 'suspended') {
+            THREE.AudioContext.getContext().resume();
+          }
+          // Safely play preloaded sound component
+          this.el.components.sound.playSound();
+        });
+      }
+    });
+  </script>
 
     <script>
 AFRAME.registerComponent('spritesheet-animation', {
@@ -75,8 +91,9 @@ AFRAME.registerComponent('billboard', {
 
   <body>
     <a-scene
-      shadow="type: pcfsoft"
-      renderer="antialias: true; colorManagement: true; exposure: 1.2; toneMapping: ACESFilmic"
+      shadow="type: pcf"
+      renderer="antialias: true"
+      reflection="directionalLight: a-light#sunlight"
       xr-mode-ui="enabled: true"
       webxr="optionalFeatures: hand-tracking, layers"
       inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
@@ -87,38 +104,39 @@ AFRAME.registerComponent('billboard', {
         <img id="plantPark" src="images/background.png">
         <img id="grassBase" src="images/uncutGrassB.png">
         <img id="grassNormal" src="images/uncutGrassN.png">
-	<audio id="cyanMusic" src="audio/cyan.mp3" crossorigin="anonymous" preload="auto"></audio>
+	<audio id="cyanMusic" src="audio/cyan.mp3" crossorigin="anonymous" crossorigin="anonymous" preload="auto"></audio>
 
+	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>
 
-        <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
-        <a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pole.glb"></a-asset-item>
-        <a-asset-item id="wasteBasket" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/basket.glb"></a-asset-item>
+        <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pole.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="wasteBasket" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/basket.glb" crossorigin="anonymous"></a-asset-item>
 
-        <a-asset-item id="dumbcaneA" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneA.glb"></a-asset-item>
-        <a-asset-item id="dumbcaneB" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneB.glb"></a-asset-item>
-        <a-asset-item id="dumbcaneC" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneC.glb"></a-asset-item>
-        <a-asset-item id="dumbcaneD" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneD.glb"></a-asset-item>
-        <a-asset-item id="dumbcaneE" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneE.glb"></a-asset-item>
+        <a-asset-item id="dumbcaneA" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneA.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="dumbcaneB" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneB.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="dumbcaneC" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneC.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="dumbcaneD" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneD.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="dumbcaneE" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneE.glb" crossorigin="anonymous"></a-asset-item>
 
-        <a-asset-item id="taro" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/taro1.glb"></a-asset-item>
-        <a-asset-item id="palm1" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bottlePalm1.glb"></a-asset-item>
-        <a-asset-item id="palmetto" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/palmetto.glb"></a-asset-item>
+        <a-asset-item id="taro" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/taro1.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="palm1" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bottlePalm1.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="palmetto" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/palmetto.glb" crossorigin="anonymous"></a-asset-item>
 
-        <a-asset-item id="SOFsculpture" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/SOF_Lit.glb"></a-asset-item>
-        <a-asset-item id="sidewalk2" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/sidewalk5.glb"></a-asset-item>
-        <a-asset-item id="pedestal" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pedestal.glb"></a-asset-item>
-        <a-asset-item id="lowWall" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/parkWall2.glb"></a-asset-item>
+        <a-asset-item id="SOFsculpture" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/SOF_Lit.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="sidewalk2" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/sidewalk5.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="pedestal" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pedestal.glb" crossorigin="anonymous"></a-asset-item>
+        <a-asset-item id="lowWall" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/parkWall2.glb" crossorigin="anonymous"></a-asset-item>
 
 	<!-- CYAN ASSETS -->
 
-	<a-asset-item id="FennelStalk" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/FennelStalk1.glb"></a-asset-item>
-	<a-asset-item id="ShafferPlaque" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/ShafferPlaque.glb"></a-asset-item>
-	<a-asset-item id="Prometheus" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/PrometheusFountain.glb"></a-asset-item>	
+	<a-asset-item id="FennelStalk" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/FennelStalk1.glb" crossorigin="anonymous"></a-asset-item>
+	<a-asset-item id="ShafferPlaque" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/ShafferPlaque.glb" crossorigin="anonymous"></a-asset-item>
+	<a-asset-item id="Prometheus" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/PrometheusFountain.glb" crossorigin="anonymous"></a-asset-item>	
  	<img id="torchSheet" src="images/bonefire_fwd4.PNG">
       </a-assets>
 
       <!-- CAMERA RIG -->
-      <a-entity id="rig" movement-controls="speed: 0.15; fly: false" position="0 1.6 0" rotation="0 170 0">
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true" position="4.5 1.6 13" rotation="0 10 0">
         <a-entity id="camera"
                   camera
                   look-controls="pointerLockEnabled: true"
@@ -177,14 +195,13 @@ AFRAME.registerComponent('billboard', {
       </a-plane>
 
       <!-- Nav Mesh -->
-      <a-plane id="nav"
-               nav-mesh
-               position="0 -0.9 0"
-               rotation="-90 0 0"
-               width="25"
-               height="25"
-               visible="false">
-      </a-plane>
+      <a-entity gltf-model="#navmesh"
+	       id="nav"
+	       scale="0.7 1 0.7"
+               position="0 -2 0"
+               rotation="0 0 0"
+   	       visible="false">
+      </a-entity>
 
       <!-- LIGHTING -->
       <a-entity id="amb" light="type: ambient; intensity: .3" position="0 6 0"></a-entity>

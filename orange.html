@@ -3,7 +3,7 @@
     <title>Sticks of Fire – Orange Vignette</title>
 
     <!-- A‑Frame Core -->
-    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
     <!-- Extras: nav-mesh + teleport -->
    <script src="javascript/aframe-extras.min.js"></script>
@@ -62,6 +62,8 @@
         <a-asset-item id="parkBench" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/bench.glb"></a-asset-item>
         <a-asset-item id="lightpole" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/pole.glb"></a-asset-item>
         <a-asset-item id="wasteBasket" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/basket.glb"></a-asset-item>
+
+  	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>
 
         <a-asset-item id="dumbcaneA" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneA.glb"></a-asset-item>
         <a-asset-item id="dumbcaneB" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/dumbcaneB.glb"></a-asset-item>
@@ -154,14 +156,13 @@
       </a-plane>
 
       <!-- Nav Mesh -->
-      <a-plane id="nav"
-               nav-mesh
-               position="0 -0.9 0"
-               rotation="-90 0 0"
-               width="25"
-               height="25"
-               visible="false">
-      </a-plane>
+      <a-entity gltf-model="#navmesh"
+	       id="nav"
+	       scale="0.7 1 0.7"
+               position="0 -2 0"
+               rotation="0 0 0"
+   	       visible="false">
+      </a-entity>
 
       <!-- LIGHTING -->
       <a-entity id="amb" light="type: ambient; intensity: .3" position="0 6 0"></a-entity>

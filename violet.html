@@ -106,7 +106,8 @@ AFRAME.registerComponent('billboard', {
         <img id="plantPark" src="images/background.png">
         <img id="grassBase" src="images/uncutGrassB.png">
         <img id="grassNormal" src="images/uncutGrassN.png">
-	<audio id="violetMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/violet.mp3" crossorigin="anonymous" preload="auto" loop="true"></audio>
+
+	<audio id="violetMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/violet.mp3" crossorigin="anonymous" autoplay preload></audio>
 
 	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>
 
@@ -228,8 +229,6 @@ AFRAME.registerComponent('billboard', {
       </a-entity>
 
 	<!-- AUDIO -->
-    
-       <a-entity audio="src: #violetMusic; autoplay: true; loop: true"></entity>
  
 <!--	<a-entity sound="src: #violetMusic; autoplay: true; loop: true; refDistance: 20; maxDistance: 2" position="0 2 0"></a-entity> -->
 

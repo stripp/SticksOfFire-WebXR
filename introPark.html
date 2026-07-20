@@ -40,7 +40,7 @@
       <a-assets>
         <img id="plantPark" src="images/background.png">
 	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" crossorigin="anonymous" preload="auto"></audio>
-	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>        
+	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navMesh.glb" crossorigin="anonymous"></a-asset-item>        
 	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/newPark.glb" crossorigin="anonymous"></a-asset-item>
       </a-assets>
 
@@ -88,9 +88,7 @@
       <!-- Nav Mesh -->
       <a-entity gltf-model="#navmesh"
 	       id="nav"
-	       scale="0.7 1 0.7"
-               position="0 -2 0"
-               rotation="0 0 0"
+               position="0 -0.99 0"
    	       visible="false">
       </a-entity>
 

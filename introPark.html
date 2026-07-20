@@ -45,10 +45,9 @@
       </a-assets>
 
       <!-- CAMERA RIG -->
-      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true; controls: checkpoint, gamepad, trackpad, keyboard, nipple;" position="4.5 0 13" rotation="0 10 0" checkpoint-controls gamepad-controls trackpad-controls keyboard-controls nipple-controls>
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true; controls: gamepad, trackpad, keyboard, nipple;" position="4.5 0 13" rotation="0 10 0" gamepad-controls trackpad-controls keyboard-controls nipple-controls>
         <a-entity id="head"
                   camera
-	          nav-agent="speed: 1.5"
                   look-controls="pointerLockEnabled: true"
 		  position="1 1.65 -1"
 		  rotation>
@@ -56,7 +55,10 @@
         </a-entity>
       </a-entity>
 
-      <!-- CONTROLLERS -->
+    
+  <!-- CONTROLLERS -->
+
+<!--
       <a-entity id="rightHand"
                 laser-controls="hand: right"
                 teleport-controls="
@@ -67,11 +69,11 @@
                   curveShootingSpeed: 6;">
       </a-entity> 
 
-      <a-entity id="leftHand" laser-controls="hand: left"></a-entity> 
+      <a-entity id="leftHand" laser-controls="hand: left"></a-entity> -->
 
       <!-- HAND TRACKING -->
-     <a-entity hand-tracking-controls="hand: left"></a-entity>
-      <a-entity hand-tracking-controls="hand: right"></a-entity> 
+   <!--  <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity> -->
 
       <!-- ENVIRONMENT -->
 

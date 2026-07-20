@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+<title>WebXR with A-Frame</title>
+    <!-- A-Frame library -->
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <!-- A-Frame Extras -->
+    <script src="javascript/aframe-extras.min.js"></script>
+
+<!-- Scale entity on mouseover -->
+<script>
+  AFRAME.registerComponent('scale-on-mouseenter', {
+    schema: {
+      to: {default: '2 2 2', type: 'vec3'}
+    },
+
+    init: function () {
+      var data = this.data;
+      var el = this.el;
+      this.el.addEventListener('mouseenter', function () {
+        el.object3D.scale.copy(data.to);
+      });
+    }
+  });
+</script>
+
+  </head>
+  <body>
+    <a-scene>
+
+    <!-- ASSETS -->
+    <a-assets>
+     <a-asset-item id="parkScene" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Park.glb" crossorigin="anonymous"></a-asset-item>
+      
+    </a-assets>
+
+    <!-- Interactions NavMesh but also NavAgent should be added to camera -->
+      <a-camera>
+        <a-cursor color="#FAFAFA"></a-cursor>
+      </a-camera>
+   
+    <!-- Environment -->
+      <a-sky color="#0033EC"></a-sky>
+
+    <!-- Need to add NavMesh -->
+
+      <a-entity gtlf-model="#parkScene" position="-1 0 0"></a-entity>
+     
+
+    </a-scene>
+  </body>
+</html>

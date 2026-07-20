@@ -38,11 +38,9 @@
 
       <!-- ASSETS -->
       <a-assets>
-
+        <img id="plantPark" src="images/background.png">
 	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" crossorigin="anonymous" preload="auto"></audio>
-
-	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>
-        
+	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>        
 	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Park.glb" crossorigin="anonymous"></a-asset-item>
       </a-assets>
 
@@ -120,7 +118,7 @@
       <a-entity gltf-model="#park" id="walk1" position="0 -1 0"></a-entity>
 
       <a-cylinder id="fountainWater"
-                  position="0 0.005 0"
+                  position="0 0.015 0"
                   radius="4"
                   height=".005"
                   color="#00ccff"

@@ -45,13 +45,14 @@
       </a-assets>
 
       <!-- CAMERA RIG -->
-      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true; camera:#head" position="4.5 0 13" rotation="0 10 0">
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true; controls: checkpoint, gamepad, trackpad, keyboard, nipple;" position="4.5 0 13" rotation="0 10 0" checkpoint-controls gamepad-controls trackpad-controls keyboard-controls nipple-controls>
         <a-entity id="head"
                   camera
 	          nav-agent="speed: 1.5"
-                  look-controls
-                  wasd-controls="acceleration: 20"
-		  position="1 1.65 -1">
+                  look-controls="pointerLockEnabled: true"
+		  position="1 1.65 -1"
+		  rotation>
+         <a-cursor material raycaster cursor geometry position></a-cursor>
         </a-entity>
       </a-entity>
 

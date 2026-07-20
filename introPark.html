@@ -41,16 +41,17 @@
         <img id="plantPark" src="images/background.png">
 	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" crossorigin="anonymous" preload="auto"></audio>
 	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navmesh.glb" crossorigin="anonymous"></a-asset-item>        
-	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Park.glb" crossorigin="anonymous"></a-asset-item>
+	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/newPark.glb" crossorigin="anonymous"></a-asset-item>
       </a-assets>
 
       <!-- CAMERA RIG -->
-      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true" position="4.5 1.6 13" rotation="0 10 0">
-        <a-entity id="camera"
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true; camera:#head" position="4.5 -1 13" rotation="0 10 0">
+        <a-entity id="head"
                   camera
 	          nav-agent="speed: 1.5"
-                  look-controls="pointerLockEnabled: true"
-                  wasd-controls="acceleration: 20">
+                  look-controls
+                  wasd-controls="acceleration: 20"
+		  position="0 0.65 0">
         </a-entity>
       </a-entity>
 
@@ -59,17 +60,17 @@
                 laser-controls="hand: right"
                 teleport-controls="
                   cameraRig: #rig;
-                  teleportOrigin: #camera;
+                  teleportOrigin: #head;
                   button: trigger;
                   type: parabolic;
                   curveShootingSpeed: 6;">
-      </a-entity>
+      </a-entity> 
 
-      <a-entity id="leftHand" laser-controls="hand: left"></a-entity>
+      <a-entity id="leftHand" laser-controls="hand: left"></a-entity> 
 
       <!-- HAND TRACKING -->
-      <a-entity hand-tracking-controls="hand: left"></a-entity>
-      <a-entity hand-tracking-controls="hand: right"></a-entity>
+     <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity> 
 
       <!-- ENVIRONMENT -->
 

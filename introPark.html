@@ -54,11 +54,9 @@
          <a-cursor material raycaster cursor geometry position></a-cursor>
         </a-entity>
       </a-entity>
-
     
   <!-- CONTROLLERS -->
 
-<!--
       <a-entity id="rightHand"
                 laser-controls="hand: right"
                 teleport-controls="
@@ -66,14 +64,15 @@
                   teleportOrigin: #head;
                   button: trigger;
                   type: parabolic;
-                  curveShootingSpeed: 6;">
+                  curveShootingSpeed: 6;
+                  collisionEntities: .navmesh;">
       </a-entity> 
 
-      <a-entity id="leftHand" laser-controls="hand: left"></a-entity> -->
+      <a-entity id="leftHand" laser-controls="hand: left"></a-entity>
 
       <!-- HAND TRACKING -->
-   <!--  <a-entity hand-tracking-controls="hand: left"></a-entity>
-      <a-entity hand-tracking-controls="hand: right"></a-entity> -->
+     <a-entity hand-tracking-controls="hand: left"></a-entity>
+      <a-entity hand-tracking-controls="hand: right"></a-entity> 
 
       <!-- ENVIRONMENT -->
 
@@ -91,25 +90,21 @@
       <!-- Nav Mesh -->
       <a-entity gltf-model="#navmesh"
 	       id="nav"
+               class="navmesh"
+               nav-mesh
                position="0 -0.99 0"
    	       visible="false">
       </a-entity>
 
       <!-- LIGHTING -->
-      <a-entity id="amb" light="type: ambient; intensity: 2" position="0 6 0"></a-entity>
+      <a-entity id="amb" light="type: ambient; intensity: 5" position="0 3 0"></a-entity>
 
       <a-entity id="sunlight" light="type: directional;
-                       intensity: 1.5;
+                       intensity: 4;
                        castShadow: true;
                        shadowMapHeight: 2048;
                        shadowMapWidth: 2048"
                 position="4 5 11">
-      </a-entity>
-
-      <a-entity id="sidelight" light="type: hemisphere;
-                       intensity: 0.4;
-                       color: #ffffff"
-                	position="0 5 0">
       </a-entity>
 
 	<!-- AUDIO -->

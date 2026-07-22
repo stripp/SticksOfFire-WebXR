@@ -41,7 +41,7 @@
         <img id="plantPark" src="images/background.png">
 	<audio id="parkAmbient" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/PlantParkAmbix.mp3" crossorigin="anonymous" preload="auto"></audio>
 	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navMeshSimple.glb" crossorigin="anonymous"></a-asset-item>        
-	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/newPark1.glb" crossorigin="anonymous"></a-asset-item>
+	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/newParkShadows.glb" crossorigin="anonymous"></a-asset-item>
       </a-assets>
 
       <!-- CAMERA RIG -->
@@ -54,25 +54,6 @@
          <a-cursor material raycaster cursor geometry position></a-cursor>
         </a-entity>
       </a-entity>
-    
-  <!-- CONTROLLERS -->
-
-  <!--    <a-entity id="rightHand"
-                laser-controls="hand: right"
-                teleport-controls="
-                  cameraRig: #rig;
-                  teleportOrigin: #head;
-                  button: trigger;
-                  type: parabolic;
-                  curveShootingSpeed: 6;
-                  collisionEntities: .navmesh;">
-      </a-entity>
-
-      <a-entity id="leftHand" laser-controls="hand: left"></a-entity>   -->
-
-      <!-- HAND TRACKING -->
-    <!-- <a-entity hand-tracking-controls="hand: left"></a-entity>
-      <a-entity hand-tracking-controls="hand: right"></a-entity> -->
 
       <!-- ENVIRONMENT -->
 
@@ -100,7 +81,7 @@
       <a-entity id="amb" light="type: ambient; intensity: 5" position="0 3 0"></a-entity>
 
       <a-entity id="sunlight" light="type: directional;
-                       intensity: 4;
+                       intensity: 3;
                        castShadow: true;
                        shadowMapHeight: 2048;
                        shadowMapWidth: 2048"

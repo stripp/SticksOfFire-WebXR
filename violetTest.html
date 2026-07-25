@@ -1,0 +1,246 @@
+<html>
+  <head>
+    <title>Sticks of Fire – Violet Vignette</title>
+
+    <!-- A‑Frame Core -->
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+    <!-- Extras: nav-mesh + teleport -->
+   <script src="javascript/aframe-extras.min.js"></script>
+
+    <!-- Pause sound until all is loaded -->
+  <script>
+    AFRAME.registerComponent('start-audio-on-vr', {
+      init: function () {
+        this.el.sceneEl.addEventListener('enter-vr', () => {
+          // Explicitly resume the browser's audio context first
+          if (THREE.AudioContext.getContext().state === 'suspended') {
+            THREE.AudioContext.getContext().resume();
+          }
+          // Safely play preloaded sound component
+          this.el.components.sound.playSound();
+        });
+      }
+    });
+  </script>
+
+
+    <script>
+AFRAME.registerComponent('spritesheet-animation', {
+  schema: {
+    rows: { type: 'int', default: 8 },
+    cols: { type: 'int', default: 8 },
+    fps:  { type: 'number', default: 12 },
+    src:  { type: 'selector' },
+    randomStart: { type: 'boolean', default: true }
+  },
+
+  init: function () {
+    const data = this.data;
+    const el = this.el;
+
+    el.setAttribute('material', {
+      src: data.src,
+      transparent: true,
+      shader: 'flat',
+      repeat: { x: 1 / data.cols, y: 1 / data.rows }
+    });
+
+    this.totalFrames = data.rows * data.cols;
+
+    // Randomized start frame
+    this.frame = data.randomStart
+      ? Math.floor(Math.random() * this.totalFrames)
+      : 0;
+
+    this.frameDuration = 1000 / data.fps;
+    this.lastTime = 0;
+  },
+
+  tick: function (time) {
+    if (time - this.lastTime < this.frameDuration) return;
+    this.lastTime = time;
+
+    this.frame = (this.frame + 1) % this.totalFrames;
+
+    const col = this.frame % this.data.cols;
+    const row = Math.floor(this.frame / this.data.cols);
+
+    const mesh = this.el.getObject3D('mesh');
+    if (!mesh) return;
+
+    mesh.material.map.offset.set(
+      col / this.data.cols,
+      1 - (row + 1) / this.data.rows
+    );
+  }
+});
+</script>
+
+<script>
+AFRAME.registerComponent('billboard', {
+  tick: function () {
+    const cam = this.el.sceneEl.camera;
+    if (!cam) return;
+
+    const obj = this.el.object3D;
+    obj.lookAt(cam.position);
+  }
+});
+</script>
+
+  </head>
+
+  <body>
+    <a-scene
+      background="color: #111"
+      shadow="type: pcf"
+      renderer="antialias: true"
+      reflection="directionalLight: a-light#sunlight"
+      xr-mode-ui="enabled: true"
+      webxr="optionalFeatures: hand-tracking, layers"
+      inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js"
+    >
+
+      <!-- ASSETS -->
+      <a-assets>
+        <img id="plantPark" src="images/background.png">
+        <img id="grassBase" src="images/uncutGrassB.png">
+        <img id="grassNormal" src="images/uncutGrassN.png">
+
+	<audio id="violetMusic" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/violet.mp3" crossorigin="anonymous" autoplay preload></audio>
+
+	<a-asset-item id="navmesh" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/navMeshSimple.glb" crossorigin="anonymous"></a-asset-item>        
+
+	<a-asset-item id="park" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/violetPark.glb" crossorigin="anonymous"></a-asset-item>
+
+	<!-- VIOLET ASSETS -->
+
+  	<img id="bonfireSheet" src="images/bonefire3.png" crossorigin="anonymous">
+	</a-assets>	
+
+      </a-assets>
+
+      <!-- CAMERA RIG -->
+      <a-entity id="rig" movement-controls="speed: 0.15; fly: false; constrainToNavMesh: true; controls: gamepad, trackpad, keyboard, nipple;" position="4.5 0 13" rotation="0 10 0" gamepad-controls trackpad-controls keyboard-controls nipple-controls>
+        <a-entity id="head"
+                  camera
+                  look-controls="pointerLockEnabled: true"
+		  position="1 1.65 -1"
+		  rotation>
+         <a-cursor material raycaster cursor geometry position></a-cursor>
+        </a-entity>
+      </a-entity>
+
+
+      <!-- ENVIRONMENT -->
+
+      <!-- Nav Mesh -->
+      <a-entity gltf-model="#navmesh"
+	       id="nav"
+               class="navmesh"
+               nav-mesh
+               position="0 -0.99 0"
+   	       visible="false">
+      </a-entity>
+
+      <!-- LIGHTING -->
+      <a-entity id="amb" light="type: ambient; intensity: .3" position="0 6 0"></a-entity>
+
+      <a-entity id="sunlight" light="type: directional;
+                       intensity: .2;
+                       castShadow: true;
+                       shadowMapHeight: 2048;
+                       shadowMapWidth: 2048"
+                position="4 5 11">
+      </a-entity>
+
+      <!-- SCENE OBJECTS -->
+      <a-entity gltf-model="#violetPark" id="park" position="0 -1 0"></a-entity>
+
+      <a-cylinder id="fountainWater"
+                  position="0 0.005 0"
+                  radius="4"
+                  height=".005"
+                  color="#00ccff"
+                  transparent="true"
+                  opacity="0.4">
+      </a-cylinder>
+
+	<!-- VIOLET VIGNETTE OBJECTS -->
+
+	 <a-entity id="moonlight" light="type: point; intensity: 2" position="18 14 7"></a-entity>
+	<a-entity id="moundFire" light="type: point; intensity: 10; distance: 8; color: orange" position="19 11 11.5"></a-entity>
+	<a-plane
+	 id="hutFire"
+ 	 position="19 11 11.5"
+ 	 width="1"
+	  height="1"
+	  spritesheet-animation="src: #bonfireSheet; fps: 16; randomStart: true"
+ 	 billboard>
+	</a-plane>
+	<a-entity id="cookingLight" light="type: point; decay: 1; distance: 10: intensity: 10; color: orange" position="-13.5 .075 -0.04"></a-entity>
+	<a-sphere id="moon" radius="1" position="22 15 5" color="white" emissive="#00eeff" emissive-intensity="0.7"></a-sphere>s
+	<a-plane
+	 id="campfire"
+ 	 position="-12.8 1 .1"
+ 	 width="2"
+	  height="2"
+	  spritesheet-animation="src: #bonfireSheet; fps: 16; randomStart: true"
+ 	 billboard>
+	</a-plane>
+	<a-entity id="cookingLight" light="type: point; decay: 1; distance: 10: intensity: 10; color: orange" position="-13.5 .075 -0.04"></a-entity>
+
+	<!-- VIOLET VIGNETTE TEXT -->
+
+	<a-entity id="moundText" text="
+
+value: Engravings by Theodor DeBry (1591) \n
+depict people around a small shell mound. \n
+Along Florida's Gulf Coast, these \n
+shell mounds were enormous, reaching\n 
+heights of nearly 30 feet. Florida's pre-\n
+Columbian inhabitants included Timucuan-\n
+speaking tribes in the north and Calusa \n
+tribes further south, with possible \n
+overlaps around what is now Tampa. \n
+One legend suggests that Tan-pa is a \n
+Calusa word that refers to the area's \n
+abundance of kindling, or 'sticks of fire.';
+
+	align: left;
+	baseline: bottom;
+	color: white"
+
+	position="-9 .5 7.5"
+	rotation="0 150 0"
+	scale="4 4 4">
+	</a-entity>
+
+	<a-entity id="gatorText" text="
+
+value: Nearly all images of Timucuan-speaking\n
+people are based on DeBry's 1591\n
+engravings, which in turn come from\n
+images that French painter Jacques \n
+Le Moyne de Morgues produced from \n
+memory decades after his voyage to \n
+Florida. Lemoyne's depiction of\n
+alligators alone leaves one to \n
+ponder the gaps between his \n
+representations and the people\n
+who vanished from Florida centuries \n
+ago, taking their stories with them.;
+
+	align: left;
+	baseline: bottom;
+	color: white"
+
+	position="9 .5 -9"
+	rotation="0 -40 0"
+	scale="4 4 4">
+	</a-entity>
+
+    </a-scene>
+  </body>
+</html>

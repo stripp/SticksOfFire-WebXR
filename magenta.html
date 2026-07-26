@@ -123,7 +123,6 @@ AFRAME.registerComponent('force-emissive', {
 	<!-- MAGENTA ASSETS -->
 
 	<a-asset-item id="dock" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/BobbingDock.glb" crossorigin="anonymous"></a-asset-item>
-	<a-asset-item id="garbage" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/Trashbag.glb" crossorigin="anonymous"></a-asset-item>
 	<a-asset-item id="jug" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/meshes/TrashJug.glb" crossorigin="anonymous"></a-asset-item>
 	<a-asset-item id="strike" src="https://sof-webxr-assets.s3.us-east-2.amazonaws.com/LightningBolt.glb" crossorigin="anonymous"></a-asset-item>
 
@@ -195,18 +194,9 @@ AFRAME.registerComponent('force-emissive', {
 	  easing: easeInOutQuad;
 	  dir: alternate;
 	  dur: 1000;
-	  to: 1 -.4 8.5;
+	  to: 1 -.5 8.5;
 	  loop: true"></a-entity>
-	<a-entity gltf-model="#garbage" id="trashBag" 
-	  rotation="60 180 0" 
-	  position="3 -.5 8" 
-	  scale="1 1 1"
-	  animation="property: position;
-	  easing: easeInOutQuad;
-	  dir: alternate;
-	  dur: 1500;
-	  to: 3.05 -.2 8;
-	  loop: true"></a-entity>
+
 	<a-ocean color="#114444" depth="1" width="40" opacity=".9" position="0 -.5 0" rotation="-90 0 0" scale="1 40 1"></a-ocean>
 
 <!-- Lightning Meshes -->
